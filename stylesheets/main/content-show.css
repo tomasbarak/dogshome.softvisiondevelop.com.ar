@@ -1,0 +1,112 @@
+#content{
+    display: flex;
+    justify-content: center;
+    padding-left: 10px;
+    padding-top: 50px;
+    padding-right: 10px;
+}
+#content-show{
+    width: fit-content;
+    height: 100%;
+    display: grid;
+    grid-gap: 25px;
+    grid-template-columns: repeat(5, 1fr);
+}
+.publication{
+    transition: 0.25s;
+    width: 240px;
+    height: 330px;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.15) 2px 30px 48px -25px;
+    cursor: pointer;
+}
+.publication:hover{
+    transition: 0.25s;
+    box-shadow: rgba(0, 0, 0, 0.5) 2px 30px 48px -25px;
+}
+.publication-photo{
+    width: 100%;
+    height: 50%;
+    max-height: 50%;
+    object-fit: cover;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.publication-desc-cont{
+    height: 20%;
+}
+.publication-name{
+    font-weight: 600;
+    text-align: center;
+    text-transform: none;
+    word-wrap: break-word;
+    color: #595959;
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+}
+.publication-description{
+    font-size: 12px;
+    box-sizing: border-box;
+    padding: 10px;
+    font-weight: 400;
+    line-height: normal;
+    text-align: left;
+    word-wrap: break-word;
+    word-break: break-word;
+    font-family: 'Lato', sans-serif;
+    color: #545454;
+}
+.ref-name-cont{
+    display: flex;
+    height: 30%;
+    align-items: flex-end;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    padding: 8px;
+    font-size: 12px;
+    font-weight: lighter;
+    color: #079292;
+    font-family: Lato, sans-serif;
+}
+
+@media screen and (min-width: 1300px){
+    #content-show{
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+@media screen and (max-width: 1300px){
+    #content-show{
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+@media screen and (max-width: 1023px){
+    #content-show{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media screen and (max-width: 770px){
+    #content-show{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media screen and (max-width: 480px){
+    #content-show{
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .publication{
+        transition: 0.25s;
+        width: 180px;
+        height: 270px;
+    }
+}
+@media screen and (max-width: 390px){
+    #content-show{
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .publication{
+        transition: 0.25s;
+        width: 240px;
+        height: 330px;
+    }
+}
