@@ -19,6 +19,7 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" id="theme-styles">
     <script src="scripts/auth/auth-flow-autorefresh.js"></script>
+    <script src="scripts/auth/sign-out.js"></script>
 
 </head>
 <body onload="setInicialInstance(1)">
@@ -28,7 +29,6 @@
     <a style="position: absolute; left: 0; top: 12.5vh; width: 100%; text-align: center; color: white; font-family: Lato, sans-serif; font-size: 24px; font-weight: 600">Creá tu cuenta</a>
 </div>
 <section id="sign-in" style="flex-direction: row">
-
     <div id="form">
         <div style="height: auto; width: 100%; margin-top: 50px; margin-bottom: 50px">
             <a id="instance-label" style="font-family: Lato, sans-serif; color: #222222; font-weight: 600; font-size: 20px;">Ingresá tu nombre</a>
@@ -71,6 +71,7 @@
         </div>
     </div>
 </section>
+<a href="#" onclick="signOut()" style="cursor: pointer; position: absolute; bottom: 15px; left: 15px; ">Iniciar sesion con otra cuenta</a>
 
 <!--Firebase Scripts -->
 

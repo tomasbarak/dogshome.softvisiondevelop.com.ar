@@ -34,7 +34,7 @@
     border-top-right-radius: 5px;
 }
 .publication-desc-cont{
-    height: 20%;
+    height: 40%;
 }
 .publication-name{
     font-weight: 600;
@@ -56,10 +56,12 @@
     word-break: break-word;
     font-family: 'Lato', sans-serif;
     color: #545454;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 .ref-name-cont{
     display: flex;
-    height: 30%;
+    height: 10%;
     align-items: flex-end;
     justify-content: flex-end;
     box-sizing: border-box;

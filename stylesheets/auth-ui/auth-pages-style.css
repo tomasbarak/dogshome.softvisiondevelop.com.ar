@@ -75,11 +75,17 @@ textarea:focus, input:focus{
     margin-bottom: 8px;
 }
 @font-face{font-family: 'libel-suit-rg'; src: url(../../fonts/libel-suit.otf) format('opentype');}
+
 #sign-in-title{
     font-family: libel-suit-rg, sans-serif;
     font-size: 3em;
     color: #d3d3d3;
 }
+
+.dogs-home-logo{
+    font-family: libel-suit-rg, sans-serif;
+}
+
 @media screen and (max-width: 1024px){
     input{
         height: 50px;
