@@ -27,6 +27,7 @@
 <div style="position: relative; top: 0; left: 0; width: 100vw; height: 25vh;">
     <img src="images/vector-JUNE-2020-125.svg" alt style="height: 100%; width: 100%; object-fit: cover; z-index: -1">
     <a style="position: absolute; left: 0; top: 12.5vh; width: 100%; text-align: center; color: white; font-family: Lato, sans-serif; font-size: 24px; font-weight: 600">Creá tu cuenta</a>
+    <a class="dogs-home-logo" style="position: absolute; left: 15px; top: 15px; width: auto; text-align: center; color: white; font-size: 32px; font-weight: normal">DogsHome</a>
 </div>
 <section id="sign-in" style="flex-direction: row">
     <div id="form">
@@ -65,13 +66,19 @@
                 </div>
             </div>
         </div>
+        <div id="name-ref" class="signup-instance" style="display: flex; flex-direction: column; width: 100%">
+            <div class="input-container">
+                <label for="refugio-name" style="margin-bottom: 15px; font-size: 12pt">Nombre: </label>
+                <input placeholder="Nombre" id="refugio-name" type="text" onkeypress="enter()">
+            </div>
+        </div>
         <div style="width: 100%; display: flex; flex-direction: row; justify-content: flex-end; align-items: center">
             <svg id="back-button" style="margin-bottom: 8px; margin-right: 5px; cursor: pointer;" onclick="instanceGoBack()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="24" height="24"><path fill-rule="evenodd" d="M9.78 12.78a.75.75 0 01-1.06 0L4.47 8.53a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L6.06 8l3.72 3.72a.75.75 0 010 1.06z"></path></svg>
             <a href="#" id="sign-in-btn" onclick="submitInstance()">Siguiente</a>
         </div>
     </div>
 </section>
-<a href="#" onclick="signOut()" style="cursor: pointer; position: absolute; bottom: 15px; left: 15px; ">Iniciar sesion con otra cuenta</a>
+<a href="#" onclick="signOut()" style="cursor: pointer; position: absolute; bottom: 15px; left: 15px; color: #079292">Iniciar sesion con otra cuenta</a>
 
 <!--Firebase Scripts -->
 

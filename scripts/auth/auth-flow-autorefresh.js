@@ -21,6 +21,8 @@ function refreshInstances(instance){
             break;
         //Nombre del refugio
         case 3:
+            setInstanceVisibility('name-ref');
+            setInstanceLabel('Ingrese el nombre para su refugio ');
             break;
         //Foto de perfil
         case 4:

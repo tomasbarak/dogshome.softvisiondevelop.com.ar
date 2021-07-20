@@ -8,7 +8,7 @@ function setInicialInstance(inicialNumber){
         //console.log(sessionStorage.getItem('sessionInstance'))
         if(sessionStorage.getItem('sessionInstance') !== null && sessionStorage.getItem('sessionInstance') !== undefined){
             actualInstance = Number(sessionStorage.getItem('sessionInstance'));
-            //console.log(actualInstance)
+            console.log('acutal instance does not exists but we can recover last session: ' + actualInstance)
         }else{
             //console.log("nashenashe")
             actualInstance = inicialNumber;
@@ -28,7 +28,7 @@ function setInicialInstance(inicialNumber){
 function setBackButtonVisibility(instance){
     if(instance <= 1 || instance === undefined || instance === null){
         document.getElementById('back-button').style.display = 'none';
-        console.log('nashe1');
+        console.log('nashe1 ' + instance);
         console.log( actualInstance );
 
     }else{
@@ -38,7 +38,7 @@ function setBackButtonVisibility(instance){
     }
 }
 function submitInstance(){
-    if(actualInstance < 2){
+    if(actualInstance < 4){
         console.log(actualInstance);
         switch (actualInstance){
             //email y contraseña
@@ -53,9 +53,17 @@ function submitInstance(){
             case 2:
                 saveAccountType(accTypeSelection);
                 setAccTypeSelection(accTypeSelection);
+                console.log('Selected account type: ' + accTypeSelection);
+                if(accTypeSelection !== 2){
+                    actualInstance++
+                    setBackButtonVisibility(actualInstance);
+                    sessionStorage.setItem('sessionInstance', actualInstance);
+                    refreshInstances(actualInstance);
+                }
                 break;
             //Nombre del refugio
             case 3:
+
                 break;
             //Foto de perfil
             case 4:
@@ -80,9 +88,9 @@ function submitInstance(){
                 break;
         }
         actualInstance ++;
-        setBackButtonVisibility(actualInstance);
+        setBackButtonVisibility(Number(actualInstance));
         sessionStorage.setItem('sessionInstance', actualInstance);
-        refreshInstances(actualInstance);
+        refreshInstances(Number(actualInstance));
     }
 
 }
@@ -90,7 +98,7 @@ function submitInstance(){
 function instanceGoBack(){
     if(actualInstance > 1){
         actualInstance --;
-        setBackButtonVisibility();
+        setBackButtonVisibility(actualInstance);
         sessionStorage.setItem('sessionInstance', actualInstance);
         refreshInstances(actualInstance);
     }
