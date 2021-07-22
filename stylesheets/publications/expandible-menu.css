@@ -84,3 +84,11 @@
     border-radius: 64px;
     border: 1px solid #079292;
 }
+#expandible-menu{
+    visibility: visible;
+}
+@media screen and (min-width: 1024px) {
+    #expandible-menu{
+        visibility: hidden;
+    }
+}
