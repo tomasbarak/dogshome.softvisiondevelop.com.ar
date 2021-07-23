@@ -22,10 +22,12 @@ function refreshInstances(instance){
         //Nombre del refugio
         case 3:
             setInstanceVisibility('name-ref');
-            setInstanceLabel('Ingrese el nombre para su refugio ');
+            setInstanceLabel('Ingrese el nombre para su refugio');
             break;
         //Foto de perfil
         case 4:
+            setInstanceVisibility('profile-image-selection');
+            setInstanceLabel('Seleccioná una imagen para tu perfil');
             break;
         //Telefono(s)
         case 5:

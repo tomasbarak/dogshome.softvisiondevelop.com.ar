@@ -1,5 +1,6 @@
 var actualInstance;
 var accTypeSelection;
+var usedInstances = [1];
 
 setBackButtonVisibility();
 
@@ -8,6 +9,9 @@ function setInicialInstance(inicialNumber){
         //console.log(sessionStorage.getItem('sessionInstance'))
         if(sessionStorage.getItem('sessionInstance') !== null && sessionStorage.getItem('sessionInstance') !== undefined){
             actualInstance = Number(sessionStorage.getItem('sessionInstance'));
+            if(JSON.parse(sessionStorage.getItem('instanceSequence')) !== null && JSON.parse(sessionStorage.getItem('instanceSequence')) !== undefined){
+                usedInstances = usedInstances = JSON.parse(sessionStorage.getItem('instanceSequence'));
+            }
             console.log('acutal instance does not exists but we can recover last session: ' + actualInstance)
         }else{
             //console.log("nashenashe")
@@ -43,7 +47,6 @@ function submitInstance(){
         switch (actualInstance){
             //email y contraseña
             case 0:
-
                 break;
             //Nombre y apellido
             case 1:
@@ -55,10 +58,10 @@ function submitInstance(){
                 setAccTypeSelection(accTypeSelection);
                 console.log('Selected account type: ' + accTypeSelection);
                 if(accTypeSelection !== 2){
+                    console.log("Before nashe" + actualInstance)
                     actualInstance++
                     setBackButtonVisibility(actualInstance);
                     sessionStorage.setItem('sessionInstance', actualInstance);
-                    refreshInstances(actualInstance);
                 }
                 break;
             //Nombre del refugio
@@ -88,6 +91,9 @@ function submitInstance(){
                 break;
         }
         actualInstance ++;
+        usedInstances.push(actualInstance);
+        sessionStorage.setItem('instanceSequence', JSON.stringify(usedInstances));
+        console.log("Used instances: " + JSON.parse(sessionStorage.getItem('instanceSequence')));
         setBackButtonVisibility(Number(actualInstance));
         sessionStorage.setItem('sessionInstance', actualInstance);
         refreshInstances(Number(actualInstance));
@@ -97,7 +103,11 @@ function submitInstance(){
 
 function instanceGoBack(){
     if(actualInstance > 1){
-        actualInstance --;
+        console.log("Es que si: " + usedInstances[usedInstances.length - 1]);
+        usedInstances.pop();
+        sessionStorage.setItem('instanceSequence', JSON.stringify(usedInstances));
+
+        actualInstance =  Number(usedInstances[usedInstances.length - 1]);
         setBackButtonVisibility(actualInstance);
         sessionStorage.setItem('sessionInstance', actualInstance);
         refreshInstances(actualInstance);
@@ -137,4 +147,20 @@ function saveNameAndSurnameValues(){
 }
 function saveAccountType(selection){
     sessionStorage.setItem('sessionAccType', selection);
+}
+function putProfileImage(filename) {
+    var image = document.getElementById('profile-image-upload-cont');
+    var oFReader = new FileReader();
+    oFReader.readAsDataURL(document.getElementById("upload-photo").files[0]);
+
+    var fileName = document.getElementById("upload-photo").files[0].name;
+    var idxDot = fileName.lastIndexOf(".") + 1;
+    var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
+    if (extFile=="jpg" || extFile=="jpeg" || extFile=="png"){
+        oFReader.onload = function (oFREvent) {
+            document.getElementById("profile-image-upload-cont").src = oFREvent.target.result
+        }
+    }else{
+        alert('Solo estan permitidas imagenes PNG o JPG')
+    }
 }
