@@ -130,6 +130,14 @@
 <script src="https://dogshome-6af88.web.app/__/firebase/8.6.5/firebase-auth.js"></script>
 <script src="https://dogshome-6af88.web.app/__/firebase/8.6.5/firebase-database.js"></script>
 <script src="https://dogshome-6af88.web.app/__/firebase/init.js"></script>
+<script src="https://dogshome-6af88.web.app/__/firebase/8.8.0/firebase-app-check.js"></script>
+
+<script>
+    const appCheck = firebase.appCheck();
+    // Pass your reCAPTCHA v3 site key (public key) to activate(). Make sure this
+    // key is the counterpart to the secret key you set in the Firebase console.
+    appCheck.activate('6LdffbsbAAAAAPN35hXgqZJGvOgpKVZezCzhEsfI');
+</script>
 
 <script src="scripts/auth/sign-out.js"></script>
 <script src="scripts/main/open-close-drawer.js"></script>
