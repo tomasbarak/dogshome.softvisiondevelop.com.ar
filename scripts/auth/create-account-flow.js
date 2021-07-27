@@ -42,7 +42,7 @@ function setBackButtonVisibility(instance){
     }
 }
 function submitInstance(){
-    if(actualInstance < 4){
+    if(actualInstance < 6){
         console.log(actualInstance);
         switch (actualInstance){
             //email y contraseña
@@ -148,7 +148,7 @@ function saveNameAndSurnameValues(){
 function saveAccountType(selection){
     sessionStorage.setItem('sessionAccType', selection);
 }
-function putProfileImage(filename) {
+function putProfileImage() {
     var image = document.getElementById('profile-image-upload-cont');
     var oFReader = new FileReader();
     oFReader.readAsDataURL(document.getElementById("upload-photo").files[0]);
@@ -159,8 +159,27 @@ function putProfileImage(filename) {
     if (extFile=="jpg" || extFile=="jpeg" || extFile=="png"){
         oFReader.onload = function (oFREvent) {
             document.getElementById("profile-image-upload-cont").src = oFREvent.target.result
+            document.getElementById("profile-image-upload-cont").style.objectFit = 'cover';
+            document.getElementById("profile-image-upload-cont").style.width = '100%';
+            document.getElementById("profile-image-upload-cont").style.height = '100%';
+            document.getElementById("profile-image-upload-cont").style.borderRadius = '75px';
         }
     }else{
         alert('Solo estan permitidas imagenes PNG o JPG')
     }
+}
+function formatPhoneNum(uncleanedPhone){
+        //Filter only numbers from the input
+        let cleaned = ('' + uncleanedPhone).replace(/\D/g, '');
+
+        //Check if the input is of correct length
+        let match = cleaned.match(/^((\(?\d{3}\)?[-. ]?\d{4})|(\(?\d{4}\)?[-. ]?\d{3})|(\(?\d{5}\)?[-. ]?\d{2}))[-. ]?\d{4}$/);
+
+        if (match) {
+            var matched = '(' + match[1] + ') ' + match[2] + '-' + match[3];
+            document.getElementById('acc-phone-num').value = matched;
+            console.log(match)
+        }else {
+            console.log('nose')
+        }
 }

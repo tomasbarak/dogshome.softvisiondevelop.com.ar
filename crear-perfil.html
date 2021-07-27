@@ -80,6 +80,17 @@
                 <input type="file" accept="image/png, image/gif, image/jpeg" name="photo" id="upload-photo" onchange="putProfileImage(this.filename)"/>
             </div>
         </div>
+        <div id="account-phone-num" class="signup-instance" style="display: flex; flex-direction: column; width: 100%">
+            <div class="input-container">
+                <div style="display: flex; flex-direction: row; align-items: center; justify-content: flex-start; border-bottom: solid 1px #d3d3d3">
+                    <img src="images/argFlag.png" style="height: 25px; object-fit: contain">
+                    <a style="font-family: Lato, sans-serif; font-size: 14px; color: #222222; margin: 0 10px; margin-bottom: 0.5175px">+54</a>
+                    <div style="width: 1px; height: 40px; background-color: #d3d3d3; margin-top: 10px; margin-right: 10px"></div>
+                    <!-- ^((\(?\d{3}\)?[-. ]?\d{4})|(\(?\d{4}\)?[-. ]?\d{3})|(\(?\d{5}\)?[-. ]?\d{2}))[-. ]?\d{4}$ -->
+                    <input placeholder="Numero celular" id="acc-phone-num" oninput="formatPhoneNum(this.value)" type="tel" onkeypress="enter()" style="border: none !important;">
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 <div style="width: 100%; display: flex; flex-direction: row; justify-content: flex-end; align-items: center; position: relative; left: 0; bottom: 0px; padding: 15px 15px; box-sizing: border-box; background-color: white">

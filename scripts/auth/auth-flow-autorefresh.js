@@ -31,6 +31,8 @@ function refreshInstances(instance){
             break;
         //Telefono(s)
         case 5:
+            setInstanceVisibility('account-phone-num');
+            setInstanceLabel('Ingresá tu numero celular');
             break;
         //Descripcion corta
         case 6:
