@@ -73,6 +73,9 @@ function submitInstance(){
                 break;
             //Telefono(s)
             case 5:
+                if(verifyPhoneFormat(document.getElementById('acc-phone-num').value)){
+
+                }
                 break;
             //Descripcion corta
             case 6:
@@ -148,6 +151,9 @@ function saveNameAndSurnameValues(){
 function saveAccountType(selection){
     sessionStorage.setItem('sessionAccType', selection);
 }
+function saveRefName(name){
+    sessionStorage.setItem('sessionRefName', name);
+}
 function putProfileImage() {
     var image = document.getElementById('profile-image-upload-cont');
     var oFReader = new FileReader();
@@ -172,14 +178,35 @@ function formatPhoneNum(uncleanedPhone){
         //Filter only numbers from the input
         let cleaned = ('' + uncleanedPhone).replace(/\D/g, '');
 
+        console.log(cleaned);
         //Check if the input is of correct length
-        let match = cleaned.match(/^((\(?\d{3}\)?[-. ]?\d{4})|(\(?\d{4}\)?[-. ]?\d{3})|(\(?\d{5}\)?[-. ]?\d{2}))[-. ]?\d{4}$/);
+        let match = cleaned.match(/^([0-9]{2})([0-9]{4})([0-9]{4})$/);
 
+        console.log(match);
         if (match) {
-            var matched = '(' + match[1] + ') ' + match[2] + '-' + match[3];
+            var matched = match[1] + ' ' + match[2] + '-' + match[3];
             document.getElementById('acc-phone-num').value = matched;
-            console.log(match)
+            //console.log(match)
         }else {
-            console.log('nose')
+            //console.log('nose')
+            document.getElementById('acc-phone-num').value = cleaned;
+        }
+}
+function verifyPhoneFormat(uncleanedPhone){
+        //Filter only numbers from the input
+        let cleaned = ('' + uncleanedPhone).replace(/\D/g, '');
+
+        console.log(cleaned);
+        //Check if the input is of correct length
+        let match = cleaned.match(/^([0-9]{2})([0-9]{4})([0-9]{4})$/);
+
+        console.log(match);
+        if (match) {
+            var matched = match[1] + ' ' + match[2] + '-' + match[3];
+            return matched;
+            //console.log(match)
+        }else {
+            return false;
+            //console.log('nose')
         }
 }
