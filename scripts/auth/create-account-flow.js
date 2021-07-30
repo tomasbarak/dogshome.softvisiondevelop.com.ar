@@ -70,11 +70,12 @@ function submitInstance(){
                 break;
             //Foto de perfil
             case 4:
+
                 break;
             //Telefono(s)
             case 5:
                 if(verifyPhoneFormat(document.getElementById('acc-phone-num').value)){
-
+dis
                 }
                 break;
             //Descripcion corta
@@ -169,6 +170,7 @@ function putProfileImage() {
             document.getElementById("profile-image-upload-cont").style.width = '100%';
             document.getElementById("profile-image-upload-cont").style.height = '100%';
             document.getElementById("profile-image-upload-cont").style.borderRadius = '75px';
+            saveSessionAccImage();
         }
     }else{
         alert('Solo estan permitidas imagenes PNG o JPG')
@@ -209,4 +211,22 @@ function verifyPhoneFormat(uncleanedPhone){
             return false;
             //console.log('nose')
         }
+}
+function saveSessionAccImage(){
+    var bannerImage = document.getElementById('profile-image-upload-cont');
+    var imgData = getBase64Image(bannerImage);
+    sessionStorage.setItem("sessionAccImg", imgData);
+}
+
+function getBase64Image(img) {
+    var canvas = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+
+    var dataURL = canvas.toDataURL("image/png");
+
+    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
 }
