@@ -99,6 +99,39 @@ textarea:focus, input:focus{
 #upload-photo{
     visibility: hidden;
 }
+.verif-phone-number-single-cont{
+    height: 75px;
+    width: 50px;
+    background-color: #e5e5e5;
+    margin: 10px 8px;
+    display: flex;
+    align-items: flex-end;
+}.verif-phone-number-single-input{
+    background-color: rgba(0,0,0,0);
+    margin: 0;
+    width: 50px;
+    height: 100%;
+    align-content: center;
+    text-align: center;
+}
+/* Chrome, Safari, Edge, Opera */
+.verif-phone-number-single-input::-webkit-outer-spin-button,
+.verif-phone-number-single-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.verif-phone-number-single-input::-moz-selection { /* Code for Firefox */
+    background: rgba(0,0,0,0);
+}
+
+.verif-phone-number-single-input::selection {
+    background: rgba(0,0,0,0);
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
 @media screen and (max-width: 1024px){
     input{
         height: 50px;

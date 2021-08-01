@@ -75,7 +75,8 @@ function submitInstance(){
             //Telefono(s)
             case 5:
                 if(verifyPhoneFormat(document.getElementById('acc-phone-num').value)){
-dis
+                    sessionStorage.setItem('sessionAccPhoneNum', document.getElementById('acc-phone-num').value);
+                    window.location = "phone-verification.html"
                 }
                 break;
             //Descripcion corta

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="stylesheets/auth-ui/auth-pages-style.css" rel="stylesheet">
+    <link rel="icon" href="images/DogsHomeLogo-ReDesign%20(Colorified&Final).png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+<body style="align-items: flex-start; flex-direction: column">
+<div style="position: relative; top: 0; left: 0; width: 100vw; height: 25vh;">
+    <img src="images/vector-JUNE-2020-125.svg" alt style="height: 100%; width: 100%; object-fit: cover; z-index: -1">
+    <a style="position: absolute; left: 0; top: 12.5vh; width: 100%; text-align: center; color: white; font-family: Lato, sans-serif; font-size: 24px; font-weight: 600">Verificá tu número celular</a>
+    <a class="dogs-home-logo" style="position: absolute; left: 15px; top: 15px; width: auto; text-align: center; color: white; font-size: 18px; font-weight: normal">DogsHome</a>
+</div>
+<div style="height: calc(100% - 25vh); display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%;">
+    <div style="box-sizing: border-box; padding: 0 17px; height: 150px; width: auto; margin: 10px 15px; background-color: #f6f6f6;  border-radius: 15px; display: flex; flex-direction: row; align-items: center; justify-content: center">
+        <div class="verif-phone-number-single-cont">
+            <label for="digit-1"></label>
+            <input onfocus="this.select()" id="digit-1" class="verif-phone-number-single-input" type="number" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" oninput="if(this.value.length > 0){nextInput(this.id)}"/>
+        </div>
+        <div class="verif-phone-number-single-cont">
+            <label for="digit-2"></label>
+            <input onfocus="this.select()" id="digit-2" class="verif-phone-number-single-input" type="number" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1} " oninput="if(this.value.length > 0){nextInput(this.id)}"/>
+        </div>
+        <div class="verif-phone-number-single-cont">
+            <label for="digit-3"></label>
+            <input onfocus="this.select()" id="digit-3" class="verif-phone-number-single-input" type="number" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" oninput="if(this.value.length > 0){nextInput(this.id)}"/>
+        </div>
+        <div class="verif-phone-number-single-cont">
+            <label for="digit-4"></label>
+            <input onfocus="this.select()" id="digit-4" class="verif-phone-number-single-input" type="number" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" oninput="if(this.value.length > 0){nextInput(this.id)}"/>
+        </div>
+        <div class="verif-phone-number-single-cont">
+            <label for="digit-5"></label>
+            <input onfocus="this.select()" id="digit-5" class="verif-phone-number-single-input" type="number" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" oninput="if(this.value.length > 0){nextInput(this.id)}"/>
+        </div>
+        <div class="verif-phone-number-single-cont">
+            <label for="digit-6"></label>
+            <input onfocus="this.select()" id="digit-6" class="verif-phone-number-single-input" type="number" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" oninput="if(this.value.length > 0){nextInput(this.id)}"/>
+        </div>
+    </div>
+</div>
+<script>
+    function nextInput(actualInput){
+        var inputs = ['digit-1', 'digit-2', 'digit-3', 'digit-4', 'digit-5', 'digit-6']
+        var selectedInput = inputs.indexOf(actualInput)
+
+        switch (selectedInput){
+            case 0:
+                document.getElementById(inputs[selectedInput + 1]).focus();
+                selectedInput++;
+                break;
+            case 1:
+                document.getElementById(inputs[selectedInput + 1]).focus();
+                selectedInput++;
+                break;
+            case 2:
+                document.getElementById(inputs[selectedInput + 1]).focus();
+                selectedInput++;
+                break;
+            case 3:
+                document.getElementById(inputs[selectedInput + 1]).focus();
+                selectedInput++;
+                break;
+            case 4:
+                document.getElementById(inputs[selectedInput + 1]).focus();
+                selectedInput++;
+                break;
+            case 5:
+                document.getElementById(inputs[0]).focus();
+                selectedInput = 0;
+                break;
+        }
+        console.log(selectedInput);
+    }
+</script>
+</body>
+</html>
