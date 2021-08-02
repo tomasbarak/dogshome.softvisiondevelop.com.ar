@@ -76,7 +76,7 @@ function submitInstance(){
             case 5:
                 if(verifyPhoneFormat(document.getElementById('acc-phone-num').value)){
                     sessionStorage.setItem('sessionAccPhoneNum', document.getElementById('acc-phone-num').value);
-                    window.location = "phone-verification.html"
+                    verifyPhoneNumber(sessionStorage.getItem('sessionAccPhoneNum'));
                 }
                 break;
             //Descripcion corta
