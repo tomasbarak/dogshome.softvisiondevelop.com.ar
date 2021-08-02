@@ -8,7 +8,7 @@ function verifyPhoneNumber(phone){
     var cleanedPhone = phone.replaceAll('-', '');
     console.log("phone = " + cleanedPhone);
     var oReq = new XMLHttpRequest();
-    oReq.addEventListener("load", reqListener);
+    oReq.addEventListener("readystatechange", reqListener);
     oReq.open("POST", "https://dogshome-8339.twil.io/sendSMS?phone_number=" + phone + "&country_code=54");
     oReq.send();
 }
