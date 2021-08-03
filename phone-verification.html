@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 </head>
-<body style="align-items: flex-start; flex-direction: column" onload="verifyPhoneNumber(sessionStorage.getItem('sessionAccPhoneNum'))">
+<body style="align-items: flex-start; flex-direction: column" onload="{document.getElementById('digit-1').focus(); verifyPhoneNumber(sessionStorage.getItem('sessionAccPhoneNum'))}">
 <div style="position: relative; top: 0; left: 0; width: 100vw; height: 25vh;">
     <img src="images/vector-JUNE-2020-125.svg" alt style="height: 100%; width: 100%; object-fit: cover; z-index: -1">
     <a style="position: absolute; left: 0; top: 12.5vh; width: 100%; text-align: center; color: white; font-family: Lato, sans-serif; font-size: 24px; font-weight: 600">Verificá tu número celular</a>
