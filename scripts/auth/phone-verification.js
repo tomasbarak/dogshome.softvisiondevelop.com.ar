@@ -18,13 +18,28 @@ function verifyPhoneNumber(phone){
     oReq.open("POST", "https://coral-newt-2178.twil.io/start?phone_number=" + cleanedPhone + "&country_code=54");
     oReq.send();
 }
+function reqVerifyListener(){
+    var ResponseItems = JSON.parse(this.response);
+    console.log(ResponseItems);
+    if(ResponseItems.success === true){
+        showPhoneVerificationSuccess(ResponseItems.message);
+    }else{
+        if(ResponseItems.error_code === '60022'){
+            showPhoneVerificationWrong('El código ingresado es incorrecto');
+        }else if(ResponseItems.error_code === '60023'){
+            showPhoneVerificationWrong('No se ha enviado ningún código de verificación aún');
+        }else{
+            showPhoneVerificationWrong('Ocurrió un error');
+        }
 
+    }
+}
 function verifyCode(code){
     var cleanedPhone = sessionStorage.getItem("sessionAccPhoneNum").replaceAll('-', '');
     cleanedPhone = cleanedPhone.replaceAll(' ', '');
     console.log("phone = " + cleanedPhone);
     var oReq = new XMLHttpRequest();
-    oReq.addEventListener("load", reqListener);
+    oReq.addEventListener("load", reqVerifyListener);
     oReq.open("POST", "https://coral-newt-2178.twil.io/check?phone_number=" + cleanedPhone + "&country_code=54&verification_code=" + code);
     oReq.send();
 }

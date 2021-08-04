@@ -21,3 +21,17 @@ function showPhoneVerificationSentMsg(message){
         confirmButtonColor: '#079292'
     })
 }
+function showPhoneVerificationSuccess(msg){
+    Swal.fire({
+        text: msg,
+        icon: 'success',
+        confirmButtonColor: '#079292'
+    })
+}
+function showPhoneVerificationWrong(msg){
+    Swal.fire({
+        text: msg,
+        icon: 'error',
+        confirmButtonColor: '#079292'
+    })
+}
