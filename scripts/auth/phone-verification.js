@@ -1,8 +1,11 @@
-function reqListener () {
+function reqListener() {
     var specificResponseItem = JSON.parse(this.response);
-    console.log(specificResponseItem);
     if(specificResponseItem.success === true){
-
+        codeExpirationCounter(specificResponseItem.seconds_to_expire);
+        console.log(specificResponseItem);
+        showPhoneVerificationSentMsg(specificResponseItem.message);
+    }else{
+        console.log(specificResponseItem);
     }
 }
 

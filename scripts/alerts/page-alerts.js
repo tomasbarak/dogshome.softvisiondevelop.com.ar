@@ -14,3 +14,10 @@ function showSignOutAlert(){
         }
     })
 }
+function showPhoneVerificationSentMsg(message){
+    Swal.fire({
+        text: message,
+        icon: 'info',
+        confirmButtonColor: '#079292'
+    })
+}
