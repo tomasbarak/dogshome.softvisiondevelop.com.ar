@@ -143,4 +143,19 @@ input[type=number] {
         height: 50px;
         width: 75vw;
     }
+    .verif-phone-number-single-cont{
+        height: 50px;
+        width: 30px;
+        background-color: #e5e5e5;
+        margin: 10px 8px;
+        display: flex;
+        align-items: flex-end;
+    }.verif-phone-number-single-input{
+         background-color: rgba(0,0,0,0);
+         margin: 0;
+         width: 30px;
+         height: 100%;
+         align-content: center;
+         text-align: center;
+     }
 }

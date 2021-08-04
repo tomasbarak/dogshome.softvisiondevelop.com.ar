@@ -51,7 +51,7 @@
 <div style="width: 100%; display: flex; flex-direction: row; justify-content: flex-end; align-items: center; position: relative; left: 0; bottom: 0px; padding: 15px 15px; box-sizing: border-box; background-color: white">
     <a href="#" onclick="signOut()" style="font-size: 14px; cursor: pointer; position: relative; max-width: 50%; color: #079292; display: flex; flex: 1">Iniciar sesion con otra cuenta</a>
     <div style="display: flex; flex: 1;"></div>
-    <a href="#" id="sign-in-btn" onclick="submitInstance()">Verificar</a>
+    <a href="#" id="sign-in-btn" onclick="getVerificationCode()">Verificar</a>
 </div>
 <script>
     function nextInput(actualInput){
@@ -80,8 +80,7 @@
                 selectedInput++;
                 break;
             case 5:
-                document.getElementById(inputs[0]).focus();
-                selectedInput = 0;
+                document.getElementById('sign-in-btn').focus();
                 break;
         }
         console.log(selectedInput);
