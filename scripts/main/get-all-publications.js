@@ -10,7 +10,7 @@ function getPublications(){
         if (snapshot.exists()) {
             var data = snapshot.val();
             console.log(data);
-            addPublications(data);
+            deleteAllPublications(data);
         } else {
             console.log("No data available");
         }
@@ -18,4 +18,14 @@ function getPublications(){
         console.error(error);
     });
 }
-
+function deleteAllPublications(data){
+    var elements = document.getElementsByClassName('publication');
+    var counter = 0;
+    if(elements.length > 0){
+        while(counter < e){
+            console.log('a');
+            elements[i].parentNode.removeChild(elements[i]);
+        }
+    }
+    addPublications(data);
+}
