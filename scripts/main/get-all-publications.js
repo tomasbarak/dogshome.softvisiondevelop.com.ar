@@ -19,13 +19,9 @@ function getPublications(){
     });
 }
 function deleteAllPublications(data){
-    var elements = document.getElementsByClassName('publication');
-    var counter = 0;
-    if(elements.length > 0){
-        while(counter < e){
-            console.log('a');
-            elements[i].parentNode.removeChild(elements[i]);
-        }
+    const myNode = document.getElementById("content-show");
+    while (myNode.firstChild) {
+        myNode.removeChild(myNode.lastChild);
     }
     addPublications(data);
 }

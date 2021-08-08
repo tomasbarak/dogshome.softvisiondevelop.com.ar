@@ -1,6 +1,6 @@
-function getAccountStats(email){
+function getAccountStats(uid){
 
-    var getData = firebase.database().ref('Users/'+ email.replaceAll('.', ':'));
+    var getData = firebase.database().ref('Users/'+ uid);
 
     getData.on('value', (snapshot) => {
         const data = snapshot.val();
@@ -11,7 +11,7 @@ function getAccountStats(email){
         var Stats = data.Stats;
 
         var PostsCount = data.PostsIds.length - 1;
-
+        console.log(uid);
         setAccountStats(Stats, PostsCount);
     });
 }

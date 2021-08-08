@@ -1,5 +1,5 @@
-function readUserData(userEmail){
-    var getData = firebase.database().ref('Users/'+ userEmail.replaceAll('.', ':'));
+function readUserData(uid){
+    var getData = firebase.database().ref('Users/'+ uid + '/PublicRead');
 
     getData.on('value', (snapshot) => {
         const data = snapshot.val();
@@ -10,6 +10,7 @@ function readUserData(userEmail){
             localStorage.setItem("userDataSurname", data.Surname);
             localStorage.setItem("userDataImage", data.Photo);
             useData(data);
+            getPublications();
         }else{
             window.location = 'crear-perfil.html';
         }
