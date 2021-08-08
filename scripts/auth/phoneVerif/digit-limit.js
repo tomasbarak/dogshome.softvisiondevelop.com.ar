@@ -1,3 +1,0 @@
-function nextDigit(actualDigitIndex){
-
-}
