@@ -147,6 +147,8 @@ function saveNameAndSurnameValues(){
     var nameInputValue = document.getElementById('name').value;
     var surnameInputValue = document.getElementById('surname').value;
 
+    updateProfileDisplayName(nameInputValue, surnameInputValue);
+
     sessionStorage.setItem('sessionAccName', nameInputValue);
     sessionStorage.setItem('sessionAccSurname', surnameInputValue);
 }
