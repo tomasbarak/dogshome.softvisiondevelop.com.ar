@@ -26,7 +26,7 @@ function setInicialInstance(inicialNumber){
     //console.log(actualInstance)
     setBackButtonVisibility(Number(actualInstance))
     refreshInstances(Number(actualInstance));
-
+    setLoading(false);
 
 }
 function setBackButtonVisibility(instance){

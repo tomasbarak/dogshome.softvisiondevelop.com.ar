@@ -24,10 +24,10 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" id="theme-styles">
     <script src="scripts/alerts/page-alerts.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <title>Mi perfil</title>
 
 </head>
-<body onload="{readUserData(localStorage.getItem('userDataMail'));}">
+<body onload="">
 
 <script src="scripts/main/loading-display.js"></script>
 <div id="loading-visible">
@@ -196,7 +196,8 @@
 <script>
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {
-            getAccountStats(user.uid);
+            readUserData(user.uid);
+            getAccountProfile(user.uid);
             // ...
         } else {
             window.location.href = "signin.html";

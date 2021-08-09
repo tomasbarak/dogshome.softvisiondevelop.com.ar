@@ -20,8 +20,11 @@ function getPublications(){
 }
 function deleteAllPublications(data){
     const myNode = document.getElementById("content-show");
-    while (myNode.firstChild) {
-        myNode.removeChild(myNode.lastChild);
+    if(myNode !== null){
+        while (myNode.firstChild) {
+            myNode.removeChild(myNode.lastChild);
+        }
+        addPublications(data);
+
     }
-    addPublications(data);
 }
