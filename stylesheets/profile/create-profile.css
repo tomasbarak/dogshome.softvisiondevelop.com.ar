@@ -75,6 +75,33 @@ li{
     flex-direction: column;
     margin-left: 15px;
 }
+#infoElementContainer{
+    background-color:#f6f6f6;
+    width: auto;
+    height: auto;
+    position: absolute;
+    max-width: 320px;
+    box-sizing: border-box;
+    padding: 8px;
+    border-radius: 5px;
+    border-top-left-radius: 0;
+    font-size: 12px;
+    border: 1px solid #079292;
+}
+.infoElementContainerVisible{
+    transition-duration: 0.15s;
+    opacity: 1;
+}
+.infoElementContainerNoVisible{
+    transition-duration: 0.15s;
+    opacity: 0;
+}
+#infoButton:focus{
+    outline: none;
+}
+#infoElement{
+    cursor: default;
+}
 @media screen and (max-width: 480px){
     #account-types-container{
         flex-direction: column;
