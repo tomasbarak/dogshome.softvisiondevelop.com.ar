@@ -12,27 +12,32 @@ function refreshInstances(instance){
         case 1:
             setInstanceVisibility('name-and-surname');
             setInstanceLabel('Ingresá tu nombre');
+            setInstanceInfo('Ingresá tu nombre y apellido para poder identificarte y brindarte atención personalizada')
             break;
         //Tipo de cuenta
         case 2:
             console.log('instance 2')
             setInstanceVisibility('account-type');
             setInstanceLabel('Elegí el tipo de cuenta');
+            setInstanceInfo('El tipo de cuenta que elijas definirá las acciones que podrás realizar (Publicar contenido, Contactar refugios, etc.) Leé las especificaciones de cada tipo de cuenta en la documentación de DogsHome.')
             break;
         //Nombre del refugio
         case 3:
             setInstanceVisibility('name-ref');
             setInstanceLabel('Ingrese el nombre para su refugio');
+            setInstanceInfo('Dale un nombre a tu refugio, si no tenes un refugio, podés inventar el nombre. Esto te servirá para que los demás usuarios te reconozcan.')
             break;
         //Foto de perfil
         case 4:
             setInstanceVisibility('profile-image-selection');
             setInstanceLabel('Seleccioná una imagen para tu perfil');
+            setInstanceInfo('Sube una foto de perfil representativa, asi los demás podrán reconocerte facilmente.')
             break;
         //Telefono(s)
         case 5:
             setInstanceVisibility('account-phone-num');
             setInstanceLabel('Ingresá tu numero celular');
+            setInstanceInfo('El numero de teléfono servirá para que las demás personas puedan contactarte, se necesitará verificarlo para evitar fraudes')
             break;
         //Descripcion corta
         case 6:
@@ -75,4 +80,20 @@ function setInstanceLabel(text){
     var instanceLabel = document.getElementById('instance-label');
 
     instanceLabel.innerText = text;
+}
+function setInstanceInfo(infoText){
+    var infoElement = document.getElementById('infoElement');
+
+    infoElement.innerText = infoText;
+    console.log(infoElement);
+}
+function showContextInfo(){
+    var infoElement = document.getElementById('infoElementContainer');
+
+    infoElement.className = 'infoElementContainerVisible';
+}
+function dismissContextInfo(){
+    var infoElement = document.getElementById('infoElementContainer');
+
+    infoElement.className = 'infoElementContainerNoVisible';
 }

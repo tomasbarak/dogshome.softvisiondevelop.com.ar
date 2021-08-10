@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" >
 <head>
     <meta charset="UTF-8">
     <!-- Chrome, Firefox OS and Opera -->
@@ -40,7 +40,13 @@
 <section id="sign-in" style="flex-direction: row">
     <div id="form">
         <div style="height: auto; width: 100%; margin-top: 50px; margin-bottom: 50px">
-            <a id="instance-label" style="font-family: Lato, sans-serif; color: #222222; font-weight: 600; font-size: 20px;">Ingresá tu nombre</a>
+            <div style="height: fit-content; width: 100%; display: flex; flex-direction: row; align-items: flex-start">
+                <a id="instance-label" style="font-family: Lato, sans-serif; color: #222222; font-weight: 600; font-size: 20px;">Ingresá tu nombre</a>
+                <svg onfocusout="dismissContextInfo()" id="infoButton" style="margin-left: 8px; cursor:pointer;" onclick="if(document.getElementById('infoElementContainer').className === 'infoElementContainerVisible'){dismissContextInfo()}else{showContextInfo()}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="#A9A9A9FF" width="12" height="12"><path fill-rule="evenodd" d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"></path> <title>ashei</title></svg>
+                <div id="infoElementContainer" class="infoElementContainerNoVisible">
+                    <a id="infoElement">infoElement 1.0</a>
+                </div>
+            </div>
         </div>
         <div id="name-and-surname" class="signup-instance" style="display: flex; flex-direction: column; width: 100%">
             <div class="input-container">
@@ -143,6 +149,14 @@
     });
 </script>
 <script src="scripts/auth/create-account-flow.js"></script>
+<script>
+    setInterval(function(){
+        var infoButton = document.getElementById('infoButton');
+        var infoElementCont = document.getElementById('infoElementContainer');
 
+        infoElementCont.style.left = infoButton.getBoundingClientRect().left + 6 + 'px';
+        infoElementCont.style.top = infoButton.getBoundingClientRect().top + 6 + 'px';
+    }, 0)
+</script>
 </body>
 </html>
