@@ -162,13 +162,16 @@ function putProfileImage() {
     var image = document.getElementById('profile-image-upload-cont');
     var oFReader = new FileReader();
     oFReader.readAsDataURL(document.getElementById("upload-photo").files[0]);
-
+    console.log(document.getElementById("upload-photo").fullPatt)
     var fileName = document.getElementById("upload-photo").files[0].name;
     var idxDot = fileName.lastIndexOf(".") + 1;
     var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
-    if (extFile=="jpg" || extFile=="jpeg" || extFile=="png"){
+    if (extFile==="jpg" || extFile==="jpeg" || extFile==="png"){
         oFReader.onload = function (oFREvent) {
-            document.getElementById("profile-image-upload-cont").src = oFREvent.target.result
+            document.getElementById("profile-image-upload-cont").src = oFREvent.target.result;
+            //console.log(document.getElementById("upload-photo").files[0])
+            //console.log(oFREvent.target.result)
+            uploadPhotoCloudinary(oFREvent.target.result);
             document.getElementById("profile-image-upload-cont").style.objectFit = 'cover';
             document.getElementById("profile-image-upload-cont").style.width = '100%';
             document.getElementById("profile-image-upload-cont").style.height = '100%';
@@ -217,11 +220,12 @@ function verifyPhoneFormat(uncleanedPhone){
 }
 function saveSessionAccImage(){
     var bannerImage = document.getElementById('profile-image-upload-cont');
-    var imgData = getBase64Image(bannerImage);
-    sessionStorage.setItem("sessionAccImg", imgData);
+    var imgData = bannerImage.src;
+    sessionStorage.setItem("sessionAccImgEncoded", encodeURIComponent(imgData));
 }
 
 function getBase64Image(img) {
+    console.log(img.src)
     var canvas = document.createElement("canvas");
     canvas.width = img.width;
     canvas.height = img.height;
@@ -229,7 +233,8 @@ function getBase64Image(img) {
     var ctx = canvas.getContext("2d");
     ctx.drawImage(img, 0, 0);
 
-    var dataURL = canvas.toDataURL("image/png");
+    var dataURL = canvas.toDataURL();
 
-    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+    //console.log(dataURL);
+    return dataURL;
 }

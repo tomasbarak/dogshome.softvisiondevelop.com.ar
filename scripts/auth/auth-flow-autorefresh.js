@@ -1,4 +1,5 @@
 function refreshInstances(instance){
+    var user = firebase.auth().currentUser;
     //console.log(instance)
     switch(instance){
         case undefined:
@@ -10,9 +11,15 @@ function refreshInstances(instance){
             break;
         //Nombre y apellido
         case 1:
+            var nameInput = document.getElementById('name');
+            var surnameInput = document.getElementById('surname');
             setInstanceVisibility('name-and-surname');
             setInstanceLabel('Ingresá tu nombre');
             setInstanceInfo('Ingresá tu nombre y apellido para poder identificarte y brindarte atención personalizada')
+            if(user.displayName){
+                nameInput.value = JSON.parse(user.displayName).name;
+                surnameInput.value = JSON.parse(user.displayName).surname;
+            }
             break;
         //Tipo de cuenta
         case 2:
@@ -29,9 +36,17 @@ function refreshInstances(instance){
             break;
         //Foto de perfil
         case 4:
+            var imageCont = document.getElementById('profile-image-upload-cont');
             setInstanceVisibility('profile-image-selection');
             setInstanceLabel('Seleccioná una imagen para tu perfil');
-            setInstanceInfo('Sube una foto de perfil representativa, asi los demás podrán reconocerte facilmente.')
+            setInstanceInfo('Sube una foto de perfil representativa, asi los demás podrán reconocerte facilmente.');
+            if(user.photoURL){
+                imageCont.src = user.photoURL;
+                imageCont.style.objectFit = 'cover';
+                imageCont.style.width = '100%';
+                imageCont.style.height = '100%';
+                imageCont.style.borderRadius = '75px';
+            }
             break;
         //Telefono(s)
         case 5:
@@ -85,7 +100,7 @@ function setInstanceInfo(infoText){
     var infoElement = document.getElementById('infoElement');
 
     infoElement.innerText = infoText;
-    console.log(infoElement);
+    //console.log(infoElement);
 }
 function showContextInfo(){
     var infoElement = document.getElementById('infoElementContainer');

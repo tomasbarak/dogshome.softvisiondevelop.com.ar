@@ -11,14 +11,14 @@ function saveProfileData(){
         }
     });
 }
-function updateProfilePhoto(){
+function updateProfilePhoto(photo){
     const user = firebase.auth().currentUser;
 
     user.updateProfile({
-        photoURL: "https://example.com/jane-q-user/profile.jpg"
+        photoURL: photo
     }).then(() => {
         // Update successful
-        console.log("success")
+        console.log("Profile Image Updated Successfully(URL: " + user.photoURL + ")")
         // ...
     }).catch((error) => {
         // An error occurred
@@ -30,14 +30,30 @@ function updateProfileDisplayName(name, surname){
     const user = firebase.auth().currentUser;
     var displayName = name.replaceAll(' ', '') + ' ' + surname.replaceAll(' ', '');
     user.updateProfile({
-        displayName: displayName
+        displayName: JSON.stringify({
+            "name": name.replaceAll(' ', ''),
+            "surname": surname.replaceAll(' ', ''),
+            "displayName": displayName
+        })
     }).then(() => {
         // Update successful
-        console.log("success")
+        console.log("Display Name Updated Successfully("+user.displayName+")")
         // ...
     }).catch((error) => {
         // An error occurred
         console.log(error);
         // ...
     });
+}
+
+function uploadPhotoCloudinary(img){
+    var xhr = new XMLHttpRequest();
+    xhr.addEventListener("load", function (){
+        var response = JSON.parse(xhr.responseText);
+        var photoUrl = response.url;
+        updateProfilePhoto(photoUrl);
+    });
+    xhr.open('POST', 'https://coral-newt-2178.twil.io/uploadPhoto', true);
+    xhr.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' );
+    xhr.send('p=' + encodeURIComponent(img));
 }
