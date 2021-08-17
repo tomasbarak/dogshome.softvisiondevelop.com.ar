@@ -1,6 +1,7 @@
 var actualInstance;
 var accTypeSelection;
 var usedInstances = [1];
+var conditionsReached = false;
 
 setBackButtonVisibility();
 
@@ -41,6 +42,7 @@ function setBackButtonVisibility(instance){
         console.log( actualInstance );
     }
 }
+
 function submitInstance(){
     if(actualInstance < 6){
         console.log(actualInstance);
@@ -105,7 +107,43 @@ function submitInstance(){
     }
 
 }
-
+function checkConditions(instance){
+    switch (instance){
+        //email y contraseña
+        case 0:
+            break;
+        //Nombre y apellido
+        case 1:
+            break;
+        //Tipo de cuenta
+        case 2:
+            break;
+        //Nombre del refugio
+        case 3:
+            break;
+        //Foto de perfil
+        case 4:
+            break;
+        //Telefono(s)
+        case 5:
+            break;
+        //Descripcion corta
+        case 6:
+            break;
+        //Descripcion larga
+        case 7:
+            break;
+        //Sitio web
+        case 8:
+            break;
+        //Redes sociales
+        case 9:
+            break;
+        //Terminos y condiciones
+        case 10:
+            break;
+    }
+}
 function instanceGoBack(){
     if(actualInstance > 1){
         console.log("Es que si: " + usedInstances[usedInstances.length - 1]);

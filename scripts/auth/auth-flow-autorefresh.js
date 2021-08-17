@@ -17,8 +17,8 @@ function refreshInstances(instance){
             setInstanceLabel('Ingresá tu nombre');
             setInstanceInfo('Ingresá tu nombre y apellido para poder identificarte y brindarte atención personalizada')
             if(user.displayName){
-                nameInput.value = JSON.parse(user.displayName).name;
-                surnameInput.value = JSON.parse(user.displayName).surname;
+                nameInput.value = JSON.parse(user.displayName).nameAndSurname.name;
+                surnameInput.value = JSON.parse(user.displayName).nameAndSurname.surname;
             }
             break;
         //Tipo de cuenta
