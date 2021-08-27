@@ -165,9 +165,9 @@ function updateProfileDisplayName(name, surname) {
         }
     }
     function saveUserPhoneNumber(phone){
-        const user = firebase.auth().currentUser();
+        const user = firebase.auth().currentUser;
         firebase.database().ref('Users/' + user.uid + "/PublicRead/").update({
-            Id: user.uid
+            Phone: phone
         }, (error) => {
             if (error) {
                 console.log(error);

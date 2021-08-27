@@ -24,6 +24,7 @@ function reqVerifyListener(){
     console.log(ResponseItems);
     if(ResponseItems.success === true){
         showPhoneVerificationSuccess(ResponseItems.message);
+        saveUserPhoneNumber(phoneGlobal);
     }else{
         if(ResponseItems.error_code === '60022'){
             showPhoneVerificationWrong('El código ingresado es incorrecto');

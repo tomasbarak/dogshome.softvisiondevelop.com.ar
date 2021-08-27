@@ -9,7 +9,9 @@
     <!-- iOS Safari -->
     <meta name="apple-mobile-web-app-status-bar-style" content="#079292">
     <title>DogsHome | Inicio</title>
-
+    <meta name="description" content="Adoptá y ayudá a los perros que más lo nececitan con DogsHome. DogsHome es un sitio de adopción de perros online,
+                                      con algunas funcionalidades extras, como localizar perros perdidos, reportar perros perdidos, area de noticias,
+                                      y mucho más. Visitá DogsHome para enterarte de todo." data-head-react="true">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <script src="scripts/main/basic-navigation.js"></script>
@@ -66,7 +68,7 @@
     <div class="expandible-menu-invisible" id="expandible-menu">
         <div class="expandible-menu-option-cont" id="name-option-exp-menu">
             <img class="" id="profile-pic-exp-menu" src="animations/image-loading.gif" alt="profile pic" style="height: 55px; width: 55px; cursor: pointer; margin-right: 10px; user-select: none; border-radius: 80px; object-fit: cover">
-            <a id="exp-menu-name"></a>
+            <a id="exp-menu-name"> </a>
         </div>
         <ul class="exp-options-container">
             <li>
@@ -158,8 +160,7 @@
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {
             if(user.emailVerified === true){
-                var uid = firebase.auth().currentUser.uid;
-                readUserData(uid);
+                checkProfile(user);
             }else{
                 window.location = "verification.html";
             }

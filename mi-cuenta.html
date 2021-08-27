@@ -196,7 +196,7 @@
 <script>
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {
-            readUserData(user.uid);
+            readUserData(user);
             getAccountProfile(user.uid);
             // ...
         } else {

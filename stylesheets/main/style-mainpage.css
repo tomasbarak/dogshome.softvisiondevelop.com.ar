@@ -49,7 +49,10 @@ html, body {
     justify-content: center;
     padding: 10px 8px;
     box-sizing: border-box;
-    z-index: 102;
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
 }
 #search-input, #search-input-container, #search-form{
     height: 100%;

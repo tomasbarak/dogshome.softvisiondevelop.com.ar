@@ -192,6 +192,7 @@ function saveNameAndSurnameValues(){
 }
 function saveAccountType(selection){
     sessionStorage.setItem('sessionAccType', selection);
+    saveAccType(selection);
 }
 function saveRefName(name){
     sessionStorage.setItem('sessionRefName', name);

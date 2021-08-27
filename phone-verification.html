@@ -6,14 +6,14 @@
     <link href="stylesheets/auth-ui/auth-pages-style.css" rel="stylesheet">
     <link rel="icon" href="images/DogsHomeLogo-ReDesign%20(Colorified&Final).png">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="scripts/auth/phone-verification.js"></script>
+    <script src="scripts/auth/phoneVerif/phone-verification.js"></script>
     <script src="scripts/auth/phoneVerif/code-expire-time-refresh.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" id="theme-styles">
     <script src="scripts/alerts/page-alerts.js"></script>
 </head>
-<body style="align-items: flex-start !important; height: 100vh !important; flex-direction: column" onload="{document.getElementById('digit-1').focus(); verifyPhoneNumber(sessionStorage.getItem('sessionAccPhoneNum'))}">
+<body style="align-items: flex-start !important; height: 100vh !important; flex-direction: column" onload="{document.getElementById('digit-1').focus();}">
 <div style="position: relative; top: 0; left: 0; width: 100vw; height: 25vh;">
     <img src="images/vector-JUNE-2020-125.svg" alt style="height: 100%; width: 100%; object-fit: cover; z-index: -1">
     <a style="position: absolute; left: 0; top: 12.5vh; width: 100%; text-align: center; color: white; font-family: Lato, sans-serif; font-size: 24px; font-weight: 600">Verificá tu número celular</a>
@@ -51,7 +51,7 @@
 <div style="width: 100%; display: flex; flex-direction: row; justify-content: flex-end; align-items: center; position: relative; left: 0; bottom: 0px; padding: 15px 15px; box-sizing: border-box; background-color: white">
     <a href="#" onclick="signOut()" style="font-size: 14px; cursor: pointer; position: relative; max-width: 50%; color: #079292; display: flex; flex: 1">Iniciar sesion con otra cuenta</a>
     <div style="display: flex; flex: 1;"></div>
-    <a href="#" id="sign-in-btn" onclick="getVerificationCode()">Verificar</a>
+    <a href="#" id="sign-in-btn" onload="" onclick="getVerificationCode()">Verificar</a>
 </div>
 <script>
     function nextInput(actualInput){
@@ -85,6 +85,25 @@
         }
         console.log(selectedInput);
     }
+</script>
+<script src="https://dogshome-6af88.web.app/__/firebase/8.6.5/firebase-app.js"></script>
+
+<!-- Add Firebase products that you want to use -->
+<script src="https://dogshome-6af88.web.app/__/firebase/8.6.5/firebase-auth.js"></script>
+<script src="https://dogshome-6af88.web.app/__/firebase/8.6.5/firebase-database.js"></script>
+
+<script src="https://dogshome-6af88.web.app/__/firebase/init.js"></script>
+<script src="scripts/auth/save-profile-data.js"></script>
+
+<script>
+    firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+            verifyPhoneNumber(sessionStorage.getItem('sessionAccPhoneNum'));
+        } else {
+            window.location.href = "signin.html";
+            // ...
+        }
+    });
 </script>
 </body>
 </html>

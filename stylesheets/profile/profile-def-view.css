@@ -64,6 +64,7 @@ html, body {
     align-items: center;
     justify-content: flex-start;
     flex-direction: column;
+    margin-top: 60px;
 }
 #profile-stats-cont-mobile{
     background-color: #e6e6e6;
