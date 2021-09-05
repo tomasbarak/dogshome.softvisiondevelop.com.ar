@@ -44,7 +44,7 @@ function setBackButtonVisibility(instance){
 }
 
 function submitInstance(){
-    if(actualInstance < 6){
+    if(actualInstance < 7){
         console.log(actualInstance);
         switch (actualInstance){
             //email y contraseña
@@ -83,6 +83,11 @@ function submitInstance(){
                 break;
             //Descripcion corta
             case 6:
+                let textarea = document.getElementById('short-desc');
+
+                if(textarea.value.length > 0){
+                    saveUserShortDesc(textarea.value)
+                }
                 break;
             //Descripcion larga
             case 7:

@@ -167,7 +167,20 @@ function updateProfileDisplayName(name, surname) {
     function saveUserPhoneNumber(phone){
         const user = firebase.auth().currentUser;
         firebase.database().ref('Users/' + user.uid + "/PublicRead/").update({
-            Phone: phone
+            Phone: phone,
+            PhoneVerified: "true"
+        }, (error) => {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log("Success");
+            }
+        });
+    }
+    function saveUserShortDesc(shortDesc){
+        const user = firebase.auth().currentUser;
+        firebase.database().ref('Users/' + user.uid + "/PublicRead/").update({
+            ShortDescription: shortDesc,
         }, (error) => {
             if (error) {
                 console.log(error);

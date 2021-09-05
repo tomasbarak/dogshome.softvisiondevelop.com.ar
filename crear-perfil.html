@@ -106,6 +106,13 @@
                 </div>
             </div>
         </div>
+        <div id="short-desc-ref" class="signup-instance" style="display: flex; flex-direction: column; width: 100%">
+            <div class="input-container">
+                <label for="refugio-name" style="margin-bottom: 15px; font-size: 12pt">Descripción corta: </label>
+                <textarea maxlength="140" onfocus="this.maxLength = 140" onfocusout="this.maxLength = 140" onchange="this.maxLength = 140" oninput="document.getElementById('short-desc-length').innerText = this.value.length + '/140'; this.maxLength = 140" style="resize: none; overflow: hidden; width: 100%; height: 100px; border-radius: 3px; box-sizing: border-box; padding: 5px" placeholder="Escribí tu descripción corta(máx. 140 caracteres)" id="short-desc" type="text" onkeypress="enter()"></textarea>
+                <a id="short-desc-length" style="width: 100%; text-align: end; font-size: 10px; margin-top: 5px; color: #079292">0/140</a>
+            </div>
+        </div>
     </div>
 </section>
 <div style="width: 100%; display: flex; flex-direction: row; justify-content: flex-end; align-items: center; position: relative; left: 0; bottom: 0px; padding: 15px 15px; box-sizing: border-box; background-color: white">
@@ -136,33 +143,9 @@
 <script>
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {
-
-            var location = window.location.href;
             setInicialInstance(1)
-
-            /*window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha', {
-                'size': 'invisible',
-                'callback': (response) => {
-                    user.linkWithPhoneNumber('+541165413200', window.recaptchaVerifier).then(function (confirmationResult){
-                        window.confirmationResult = confirmationResult;
-                        console.log("nashe" + confirmationResult);
-                    }).catch(function (error) {
-                        console.log(error);
-                    });
-                }
-            });
-            window.recaptchaVerifier.render();*/
-            if(location.includes("localhost")){
-                //window.location.href = "index.html";
-            }else{
-                //window.location.href = "/";
-            }
-
-            var uid = user.uid;
-            // ...
         } else {
             window.location = 'signin.html';
-            // ...
         }
     });
 </script>

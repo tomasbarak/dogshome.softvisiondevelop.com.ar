@@ -1,3 +1,27 @@
+function getPhoneFlag(phone){
+    let user = firebase.auth().currentUser
+    let dbRef = firebase.database().ref()
+    //console.log(user.uid);
+    dbRef.child('Users').child(user.uid).get().then((snapshot) => {
+        const data = snapshot.val().PublicRead;
+       //console.log(data);
+        if(data !== null ){
+            console.log(data + 'Phone is ' + phone);
+            if(data.PhoneVerified !== null && data.PhoneVerified !== 'true'){
+                console.log(data);
+                verifyPhoneNumber(phone)
+            }else{
+                window.location = 'crear-perfil.html';
+            }
+        }else{
+            window.location = 'crear-perfil.html';
+        }
+
+    }).catch((error) => {
+        console.log(error);
+    });
+}
+
 function reqListener() {
     let specificResponseItem = JSON.parse(this.response);
     if(specificResponseItem.success === true){

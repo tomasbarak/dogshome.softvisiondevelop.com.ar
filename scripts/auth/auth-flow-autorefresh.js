@@ -56,6 +56,9 @@ function refreshInstances(instance){
             break;
         //Descripcion corta
         case 6:
+            setInstanceVisibility('short-desc-ref');
+            setInstanceLabel('Escribí una descripción corta');
+            setInstanceInfo('La descripción corta de tu cuenta sirve para que las demás personas puedan saber de que se trata tu refugio o que haces como rescatista.')
             break;
         //Descripcion larga
         case 7:
