@@ -189,3 +189,30 @@ function updateProfileDisplayName(name, surname) {
             }
         });
     }
+    function saveActualInstance(instance){
+        const user = firebase.auth().currentUser;
+        console.log("profile UID: " + user.uid)
+        if(usedInstances){
+            firebase.database().ref('Users/' + user.uid + '/PublicRead').update({
+                CreationInstance: instance,
+                CreationInstanceMap: usedInstances
+            }, (error) => {
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log("Success");
+                }
+            });
+        }else{
+            firebase.database().ref('Users/' + user.uid + '/PublicRead').update({
+                CreationInstance: instance,
+            }, (error) => {
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log("Success");
+                }
+            });
+        }
+
+    }

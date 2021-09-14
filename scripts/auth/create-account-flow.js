@@ -15,8 +15,9 @@ function setInicialInstance(inicialNumber){
             }
             console.log('acutal instance does not exists but we can recover last session: ' + actualInstance)
         }else{
-            //console.log("nashenashe")
+            console.log("aaashe initial: "+inicialNumber)
             actualInstance = inicialNumber;
+            console.log("aaashe2 actual: "+actualInstance)
             sessionStorage.setItem('sessionInstance', inicialNumber);
         }
     }else{
@@ -28,7 +29,6 @@ function setInicialInstance(inicialNumber){
     setBackButtonVisibility(Number(actualInstance))
     refreshInstances(Number(actualInstance));
     setLoading(false);
-
 }
 function setBackButtonVisibility(instance){
     if(instance <= 1 || instance === undefined || instance === null){
@@ -38,8 +38,6 @@ function setBackButtonVisibility(instance){
 
     }else{
         document.getElementById('back-button').style.display = 'flex';
-        console.log('nashe2');
-        console.log( actualInstance );
     }
 }
 
@@ -103,6 +101,7 @@ function submitInstance(){
                 break;
         }
         actualInstance ++;
+        saveActualInstance(actualInstance);
         usedInstances.push(actualInstance);
         sessionStorage.setItem('instanceSequence', JSON.stringify(usedInstances));
         console.log("Used instances: " + JSON.parse(sessionStorage.getItem('instanceSequence')));
@@ -154,11 +153,12 @@ function instanceGoBack(){
         console.log("Es que si: " + usedInstances[usedInstances.length - 1]);
         usedInstances.pop();
         sessionStorage.setItem('instanceSequence', JSON.stringify(usedInstances));
-
+        console.log(Number(usedInstances[usedInstances.length - 1]))
         actualInstance =  Number(usedInstances[usedInstances.length - 1]);
-        setBackButtonVisibility(actualInstance);
-        sessionStorage.setItem('sessionInstance', actualInstance);
-        refreshInstances(actualInstance);
+        setBackButtonVisibility(Number(actualInstance));
+        sessionStorage.setItem('sessionInstance', Number(actualInstance));
+        refreshInstances(Number(actualInstance));
+        saveActualInstance(actualInstance);
     }
 }
 
@@ -232,7 +232,7 @@ function formatPhoneNum(uncleanedPhone){
 
         console.log(cleaned);
         //Check if the input is of correct length
-        let match = cleaned.match(/^([0-9]{2})([0-9]{4})([0-9]{4})$/);
+        let match = cleaned.match(/^([0-9]{2,3})([0-9]{4})([0-9]{4})$/);
 
         console.log(match);
         if (match) {
@@ -250,7 +250,7 @@ function verifyPhoneFormat(uncleanedPhone){
 
         console.log(cleaned);
         //Check if the input is of correct length
-        let match = cleaned.match(/^([0-9]{2})([0-9]{4})([0-9]{4})$/);
+        let match = cleaned.match(/^([0-9]{2,3})([0-9]{4})([0-9]{4})$/);
 
         console.log(match);
         if (match) {

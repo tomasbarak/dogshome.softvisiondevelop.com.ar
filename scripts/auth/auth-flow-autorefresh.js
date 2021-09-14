@@ -1,3 +1,4 @@
+var userProfile;
 function refreshInstances(instance){
     var user = firebase.auth().currentUser;
     //console.log(instance)
@@ -114,4 +115,24 @@ function dismissContextInfo(){
     var infoElement = document.getElementById('infoElementContainer');
 
     infoElement.className = 'infoElementContainerNoVisible';
+}
+function getCreationInstance(user){
+    const dbRef = firebase.database().ref();
+    console.log(user.uid)
+    dbRef.child("Users").child(user.uid).child("PublicRead").get().then((snapshot) => {
+        if (snapshot.exists()) {
+            console.log(snapshot.val());
+            let actualInstance = snapshot.val().CreationInstance;
+            let actualInstanceMap = snapshot.val().CreationInstanceMap;
+            console.log(actualInstance, actualInstanceMap)
+            setInicialInstance(actualInstance);
+            if(actualInstanceMap){
+                usedInstances = actualInstanceMap
+            }
+        } else {
+            console.log("No data available");
+        }
+    }).catch((error) => {
+        console.error(error);
+    });
 }
