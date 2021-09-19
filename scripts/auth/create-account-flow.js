@@ -2,8 +2,13 @@ var actualInstance;
 var accTypeSelection;
 var usedInstances = [1];
 var conditionsReached = false;
+const omitibleInstances = [7, 8];
 
 setBackButtonVisibility();
+
+setInterval(function(){
+    setSkipVisibility();
+}, 0)
 
 function setInicialInstance(inicialNumber){
     if(inicialNumber !== null || inicialNumber !== undefined){
@@ -43,6 +48,15 @@ function setBackButtonVisibility(instance){
 
     }else{
         document.getElementById('back-button').style.display = 'flex';
+    }
+}
+
+function setSkipVisibility(){
+    const skipButton = document.getElementById('skip-btn');
+    if(omitibleInstances.includes(actualInstance)){
+        skipButton.style.display = "flex";
+    }else{
+        skipButton.style.display = "none";
     }
 }
 
@@ -91,6 +105,13 @@ function submitInstance(){
                 if(textarea.value.length > 0){
                     saveUserShortDesc(textarea.value);
                 }
+                console.log('Selected account type: ' + accTypeSelection);
+                if(accTypeSelection == 1){
+                    console.log("Before nashe" + actualInstance)
+                    actualInstance+=2;
+                    setBackButtonVisibility(actualInstance);
+                    sessionStorage.setItem('sessionInstance', actualInstance);
+                }
                 break;
             //Sitio web
             case 7:
@@ -99,9 +120,14 @@ function submitInstance(){
                 if(website.value.length > 0){
                     saveUserWebSite(website.value)
                 }
+
                 break;
             //Redes sociales
             case 8:
+                let instagram = document.getElementById('instagram').value;
+                let facebook = document.getElementById('facebook').value;
+                let twitter = document.getElementById('twitter').value;
+                saveSocialMedia({instagram, facebook, twitter})
                 break;
             //Terminos y condiciones
             case 9:
@@ -165,6 +191,16 @@ function checkConditions(instance){
         case 10:
             break;
     }
+}
+function skipInstance(instanceToSkip){
+if(omitibleInstances.includes(instanceToSkip)){
+    actualInstance++;
+    usedInstances.push(actualInstance);
+    setBackButtonVisibility(Number(actualInstance));
+    refreshInstances(Number(actualInstance));
+    saveActualInstance(actualInstance);
+    sessionStorage.setItem('sessionInstance', Number(actualInstance));
+}
 }
 function instanceGoBack(){
     if(actualInstance > 1){

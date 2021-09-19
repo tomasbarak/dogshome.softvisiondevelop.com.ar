@@ -69,12 +69,18 @@ function refreshInstances(instance){
             break;
         //Redes sociales
         case 8:
+            setNextBtnText("Siguiente");
             setInstanceVisibility('social-net');
             setInstanceLabel('Ingresá tus redes sociales');
             setInstanceInfo('Poniendo tus redes sociales tenés más posibilidades de contactar personas')
             break;
         //Terminos y condiciones
         case 9:
+            setThermsAndConditions();
+            setNextBtnText("Acepto");
+            setInstanceVisibility('dogshome-therms');
+            setInstanceLabel('Aceptá nuestros terminos y condiciones para finalizar');
+            setInstanceInfo('Para empezar a utilizar nuestra web, necesitás aceptar los términos y condiciones')
             break;
     }
     //console.log(Number(instance))
@@ -109,6 +115,10 @@ function setInstanceInfo(infoText){
     infoElement.innerText = infoText;
     //console.log(infoElement);
 }
+function setNextBtnText(text){
+    let nextBtn = document.getElementById('sign-in-btn');
+    nextBtn.innerText = text;
+}
 function showContextInfo(){
     var infoElement = document.getElementById('infoElementContainer');
 
@@ -128,6 +138,8 @@ function getCreationInstance(){
             console.log(snapshot.val());
             let actualInstance = snapshot.val().CreationInstance;
             let actualInstanceMap = snapshot.val().CreationInstanceMap;
+            let accountSelection = snapshot.val().Type.TypeNum;
+            accTypeSelection = accountSelection;
             if(actualInstance >= 10){
                 window.location = "index.html";
             }else{
@@ -136,6 +148,9 @@ function getCreationInstance(){
                 if(actualInstanceMap){
                     usedInstances = actualInstanceMap
                 }
+            }
+            if(accountSelection != undefined && accountSelection!= null){
+                setAccTypeSelection(accountSelection);
             }
         } else {
             console.log("No data available");

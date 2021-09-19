@@ -5,6 +5,8 @@ html, body {
     align-items: center;
     justify-content: center;
     overflow: auto;
+    min-height: 500px;
+    padding-bottom: 10px;
 }
 
 * {

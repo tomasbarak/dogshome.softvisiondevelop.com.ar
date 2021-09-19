@@ -227,5 +227,18 @@ function updateProfileDisplayName(name, surname) {
                 }
             });
         }
-
     }
+    function saveSocialMedia(socialMediaObject){
+        const user = firebase.auth().currentUser;
+        firebase.database().ref('Users/' + user.uid + '/PublicRead/SocialMedia').update({
+            Instagram: socialMediaObject.instagram,
+            Facebook: socialMediaObject.facebook,
+            Twitter: socialMediaObject.twitter,
+        }, (error) => {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log("Success");
+            }
+        });
+        }
