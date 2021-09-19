@@ -16,11 +16,22 @@ function getAccountProfile(uid){
 }
 
 function setAccountStats(Stats){
-    document.getElementById("profile-following").innerText = Stats.Following.length
-    document.getElementById("profile-followers").innerText = Stats.Followers.length
-
-    document.getElementById("profile-following-mobile").innerText = Stats.Following.length
-    document.getElementById("profile-followers-mobile").innerText = Stats.Followers.length
+    if(Stats != null){
+        document.getElementById("profile-following").innerText = Stats.Following.length
+        document.getElementById("profile-following-mobile").innerText = Stats.Following.length
+        
+    }else{
+        document.getElementById("profile-following").innerText = '0'
+        document.getElementById("profile-following-mobile").innerText = '0'
+    }
+    if(Stats != null){
+        document.getElementById("profile-followers").innerText = Stats.Followers.length
+        document.getElementById("profile-followers-mobile").innerText = Stats.Followers.length
+    }else{
+        document.getElementById("profile-followers-mobile").innerText = '0'
+        document.getElementById("profile-followers").innerText = '0'
+    }    
+    
 }
 function setAccountPostsQ(PostsCount){
     document.getElementById("profile-posts").innerText = PostsCount;

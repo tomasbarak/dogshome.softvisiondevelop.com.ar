@@ -61,17 +61,20 @@ function refreshInstances(instance){
             setInstanceLabel('Escribí una descripción corta');
             setInstanceInfo('La descripción corta de tu cuenta sirve para que las demás personas puedan saber de que se trata tu refugio o que haces como rescatista.')
             break;
-        //Descripcion larga
-        case 7:
-            break;
         //Sitio web
-        case 8:
+        case 7:
+            setInstanceVisibility('website-ref');
+            setInstanceLabel('Escribí la dirección de tu sitio web (opcional)');
+            setInstanceInfo('Ingresando un sitio web podés dar a conocerte de una manera más personalizada')
             break;
         //Redes sociales
-        case 9:
+        case 8:
+            setInstanceVisibility('social-net');
+            setInstanceLabel('Ingresá tus redes sociales');
+            setInstanceInfo('Poniendo tus redes sociales tenés más posibilidades de contactar personas')
             break;
         //Terminos y condiciones
-        case 10:
+        case 9:
             break;
     }
     //console.log(Number(instance))
@@ -116,18 +119,23 @@ function dismissContextInfo(){
 
     infoElement.className = 'infoElementContainerNoVisible';
 }
-function getCreationInstance(user){
+function getCreationInstance(){
     const dbRef = firebase.database().ref();
-    console.log(user.uid)
+    let user = firebase.auth().currentUser;
+    console.log(user)
     dbRef.child("Users").child(user.uid).child("PublicRead").get().then((snapshot) => {
         if (snapshot.exists()) {
             console.log(snapshot.val());
             let actualInstance = snapshot.val().CreationInstance;
             let actualInstanceMap = snapshot.val().CreationInstanceMap;
-            console.log(actualInstance, actualInstanceMap)
-            setInicialInstance(actualInstance);
-            if(actualInstanceMap){
-                usedInstances = actualInstanceMap
+            if(actualInstance >= 10){
+                window.location = "index.html";
+            }else{
+                console.log(actualInstance, actualInstanceMap)
+                setInicialInstance(actualInstance);
+                if(actualInstanceMap){
+                    usedInstances = actualInstanceMap
+                }
             }
         } else {
             console.log("No data available");

@@ -189,6 +189,19 @@ function updateProfileDisplayName(name, surname) {
             }
         });
     }
+
+    function saveUserWebSite(website){
+        const user = firebase.auth().currentUser;
+        firebase.database().ref('Users/' + user.uid + "/PublicRead/").update({
+            WebSite: website,
+        }, (error) => {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log("Success");
+            }
+        });
+    }
     function saveActualInstance(instance){
         const user = firebase.auth().currentUser;
         console.log("profile UID: " + user.uid)

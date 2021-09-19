@@ -15,10 +15,15 @@ function setInicialInstance(inicialNumber){
             }
             console.log('acutal instance does not exists but we can recover last session: ' + actualInstance)
         }else{
-            console.log("aaashe initial: "+inicialNumber)
-            actualInstance = inicialNumber;
-            console.log("aaashe2 actual: "+actualInstance)
-            sessionStorage.setItem('sessionInstance', inicialNumber);
+            if(inicialNumber != undefined && inicialNumber != null){
+                console.log("aaashe initial: "+inicialNumber)
+                actualInstance = inicialNumber;
+                console.log("aaashe2 actual: "+actualInstance)
+                sessionStorage.setItem('sessionInstance', inicialNumber);
+            }else{
+                actualInstance = 1;
+                sessionStorage.setItem('sessionInstance', 1);
+            }
         }
     }else{
         //console.log("nashenashe2")
@@ -42,7 +47,7 @@ function setBackButtonVisibility(instance){
 }
 
 function submitInstance(){
-    if(actualInstance < 7){
+    if(actualInstance < 10){
         console.log(actualInstance);
         switch (actualInstance){
             //email y contraseña
@@ -84,30 +89,43 @@ function submitInstance(){
                 let textarea = document.getElementById('short-desc');
 
                 if(textarea.value.length > 0){
-                    saveUserShortDesc(textarea.value)
+                    saveUserShortDesc(textarea.value);
                 }
                 break;
-            //Descripcion larga
-            case 7:
-                break;
             //Sitio web
-            case 8:
+            case 7:
+                let website = document.getElementById('website');
+
+                if(website.value.length > 0){
+                    saveUserWebSite(website.value)
+                }
                 break;
             //Redes sociales
-            case 9:
+            case 8:
                 break;
             //Terminos y condiciones
-            case 10:
+            case 9:
+                const user = firebase.auth().currentUser;
+                firebase.database().ref('Users/' + user.uid + '/PublicRead').update({
+                        Finished: true
+                    }, (error) => {
+                        if (error) {
+                            console.log(error);
+                        } else {
+                            console.log("Success");
+                            window.location = "index.html"
+                        }
+                    });
                 break;
         }
         actualInstance ++;
-        saveActualInstance(actualInstance);
         usedInstances.push(actualInstance);
         sessionStorage.setItem('instanceSequence', JSON.stringify(usedInstances));
         console.log("Used instances: " + JSON.parse(sessionStorage.getItem('instanceSequence')));
         setBackButtonVisibility(Number(actualInstance));
         sessionStorage.setItem('sessionInstance', actualInstance);
         refreshInstances(Number(actualInstance));
+        saveActualInstance(actualInstance);
     }
 
 }

@@ -43,7 +43,7 @@
     <script src="scripts/alerts/get-alerts.js"></script>
 
 </head>
-<body onload="{requestLatitude(); readUserData(localStorage.getItem('userDataMail'))}">
+<body onload="{requestLatitude();}">
 <div id="search-bar">
     <div class="top-bar-section-cont" style="flex-direction: row; align-items: center;">
         <img src="images/DogsHomeLogo-ReDesign%20(White&Final).png" alt style="height: 50px; width: 50px; margin-right: 10px" class="">
@@ -105,7 +105,7 @@
 </div>
     <div id="map" style="height: calc(100% - 60px); width: 100%; z-index: 102"></div>
 
-    <script src="https://dogshome.softvisiondevelop.com.ar/__/firebase/8.6.5/firebase-app.js"></script>
+    <script src="https://dogshome-6af88.web.app/__/firebase/8.6.5/firebase-app.js"></script>
 
     <!-- Add Firebase products that you want to use -->
     <script src="https://dogshome-6af88.web.app/__/firebase/8.6.5/firebase-auth.js"></script>
@@ -129,6 +129,15 @@
             //document.getElementById('profile-name').innerText = userDataName + ' ' + userDataSurname;
             document.getElementById('exp-menu-name').innerText = userDataName + ' ' + userDataSurname;
         }
+    </script>
+    <script>
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                readUserData(user);
+            } else {
+                window.location = 'signin.html';
+            }
+        });
     </script>
 </body>
 </html>

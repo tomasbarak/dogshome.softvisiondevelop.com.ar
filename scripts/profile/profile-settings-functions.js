@@ -19,9 +19,12 @@ function checkProfile(user){
     });
 }
 
-function readUserData(user){
+function readUserData(){
+    let user = firebase.auth().currentUser;
     console.log(user)
-    setProfileName(JSON.parse(user.displayName));
+    let displayNameJSON =  JSON.parse(user.displayName);
+    console.log(displayNameJSON);
+    setProfileName(displayNameJSON);
     setProfileImage(user.photoURL);
 }
 

@@ -134,4 +134,26 @@ li{
         border: 1px solid #079292;
         margin-top: 15px;
     }
+} 
+#web-input-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-bottom: #079292 1px solid;
+}
+#web-input-container input{
+    border: 0px;
+}
+.social-input-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-bottom: #079292 1px solid;
+    width: 320px;
+}
+.social-input-container input{
+    border: 0px;
+
 }
