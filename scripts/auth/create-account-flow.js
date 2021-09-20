@@ -2,7 +2,7 @@ var actualInstance;
 var accTypeSelection;
 var usedInstances = [1];
 var conditionsReached = false;
-const omitibleInstances = [7, 8];
+const omitibleInstances = [4, 7, 8];
 
 setBackButtonVisibility();
 
@@ -85,7 +85,15 @@ function submitInstance(){
                 break;
             //Nombre del refugio
             case 3:
+                const refInput = document.getElementById('refugio-name');
+                let refName = String(refInput.value.replace(/\s/g, '_').trim());
 
+                if(refName.length >= 3){
+                    saveRefName(refName);
+                }else{
+                    return;
+                }
+                saveRefName(refName);
                 break;
             //Foto de perfil
             case 4:
@@ -155,43 +163,7 @@ function submitInstance(){
     }
 
 }
-function checkConditions(instance){
-    switch (instance){
-        //email y contraseña
-        case 0:
-            break;
-        //Nombre y apellido
-        case 1:
-            break;
-        //Tipo de cuenta
-        case 2:
-            break;
-        //Nombre del refugio
-        case 3:
-            break;
-        //Foto de perfil
-        case 4:
-            break;
-        //Telefono(s)
-        case 5:
-            break;
-        //Descripcion corta
-        case 6:
-            break;
-        //Descripcion larga
-        case 7:
-            break;
-        //Sitio web
-        case 8:
-            break;
-        //Redes sociales
-        case 9:
-            break;
-        //Terminos y condiciones
-        case 10:
-            break;
-    }
-}
+
 function skipInstance(instanceToSkip){
 if(omitibleInstances.includes(instanceToSkip)){
     actualInstance++;
@@ -252,9 +224,6 @@ function saveNameAndSurnameValues(){
 function saveAccountType(selection){
     sessionStorage.setItem('sessionAccType', selection);
     saveAccType(selection);
-}
-function saveRefName(name){
-    sessionStorage.setItem('sessionRefName', name);
 }
 function putProfileImage() {
     var image = document.getElementById('profile-image-upload-cont');

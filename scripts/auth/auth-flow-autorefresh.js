@@ -63,6 +63,7 @@ function refreshInstances(instance){
             break;
         //Sitio web
         case 7:
+            setNextBtnText("Siguiente");
             setInstanceVisibility('website-ref');
             setInstanceLabel('Escribí la dirección de tu sitio web (opcional)');
             setInstanceInfo('Ingresando un sitio web podés dar a conocerte de una manera más personalizada')
@@ -138,8 +139,13 @@ function getCreationInstance(){
             console.log(snapshot.val());
             let actualInstance = snapshot.val().CreationInstance;
             let actualInstanceMap = snapshot.val().CreationInstanceMap;
-            let accountSelection = snapshot.val().Type.TypeNum;
-            accTypeSelection = accountSelection;
+            let accountSelection;
+            if(snapshot.val().Type != null && snapshot.val().Type != undefined){
+                 accountSelection = snapshot.val().Type.TypeNum;
+            }
+            if(accountSelection != null && accountSelection != undefined){
+                accTypeSelection = accountSelection;
+            }
             if(actualInstance >= 10){
                 window.location = "index.html";
             }else{

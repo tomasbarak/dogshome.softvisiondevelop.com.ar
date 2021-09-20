@@ -242,3 +242,17 @@ function updateProfileDisplayName(name, surname) {
             }
         });
         }
+        function saveRefName(name){
+            sessionStorage.setItem('sessionRefName', name);
+
+            const user = firebase.auth().currentUser;
+            firebase.database().ref('Users/' + user.uid + '/PublicRead').update({
+            RefName: name
+        }, (error) => {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log("Success");
+            }
+        });
+        }
