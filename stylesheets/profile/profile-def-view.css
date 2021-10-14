@@ -186,13 +186,42 @@ html, body {
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-bottom: 5px;
 }
 .social-link{
     cursor: pointer;
     color: #079292;
     font-size: 12px;
     text-decoration: none;
+    margin-bottom: 5px;
+}
+.link-no-visible{
+    display: none;
+}
+#short-desc-cont{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    width: 100%;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 10px 5px;
+
+}
+#short-desc{
+    font-size: 12px;
+    color: #222222;
+}
+.content-show-account{
+    flex-direction: row;
+    overflow-x: visible;
+    overflow-y: auto;
+    max-width: none;
+    margin-top: 25px;
+    height: calc(752px - 316px) !important;
+    width: 100% !important;
+    align-items: start;
+    grid-auto-flow: column;
+    justify-content: start;;
 }
 @media screen and (max-width: 1024px){
     .desktop{

@@ -12,6 +12,7 @@ function checkProfile(user){
             }else{
                 window.location = 'crear-perfil.html';
             }
+
         }else{
             window.location = 'crear-perfil.html';
         }
@@ -41,7 +42,7 @@ function setProfileImage(photo){
        if(profilePicExp) profilePicExp.src = "/images/default-user-image.png";
        if(profilePicMob) profilePicMob.src = "/images/default-user-image.png";
     }
-    getPublications();
+        getPublications();
 }
 
 function setProfileName(name){

@@ -152,7 +152,7 @@ function updateProfileDisplayName(name, surname) {
             });
         }
 
-        function saveBlankPostsId() {
+        /*function saveBlankPostsId() {
             firebase.database().ref('Users/' + user.uid + "/PublicRead/PostsIds").update({
                 0: "firstPost"
             }, (error) => {
@@ -162,7 +162,7 @@ function updateProfileDisplayName(name, surname) {
                     console.log("Success");
                 }
             });
-        }
+        }*/
     }
     function saveUserPhoneNumber(phone){
         const user = firebase.auth().currentUser;
