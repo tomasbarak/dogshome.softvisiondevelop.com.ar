@@ -7,6 +7,8 @@ html, body {
     overflow: auto;
     min-height: 500px;
     padding-bottom: 10px;
+    overflow-y: hidden !important;
+
 }
 
 * {

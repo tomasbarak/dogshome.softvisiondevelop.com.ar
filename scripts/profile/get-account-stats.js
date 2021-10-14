@@ -5,9 +5,13 @@ function getAccountProfile(uid){
     getData.on('value', (snapshot) => {
         const data = snapshot.val();
 
-        document.getElementById("profile-view-image").src = data.Photo;
-        document.getElementById("profile-image-mobile").src = data.Photo;
-
+        if(data.Photo){
+            document.getElementById("profile-view-image").src = data.Photo;
+            document.getElementById("profile-image-mobile").src = data.Photo;
+        }else{
+            document.getElementById("profile-view-image").src = "/images/default-user-image.png";
+            document.getElementById("profile-image-mobile").src = "/images/default-user-image.png";
+        }
         var PostsCount = data.PostsIds.length - 1;
         console.log(uid);
         setAccountPostsQ(PostsCount);

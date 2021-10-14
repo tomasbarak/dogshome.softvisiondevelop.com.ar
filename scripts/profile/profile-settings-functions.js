@@ -29,9 +29,18 @@ function readUserData(){
 }
 
 function setProfileImage(photo){
-    document.getElementById("profile-pic").src = photo;
-    document.getElementById("profile-pic-exp-menu").src = photo;
-    document.getElementById("profile-image-mobile").src = photo;
+    let profilePic = document.getElementById("profile-pic")
+    let profilePicExp = document.getElementById("profile-pic-exp-menu")
+    let profilePicMob = document.getElementById("profile-image-mobile")
+    if(photo){
+        if(profilePic) profilePic.src = photo;
+        if(profilePicExp) profilePicExp.src = photo;
+        if(profilePicMob) profilePicMob.src = photo;
+    }else{
+       if(profilePic) profilePic.src = "/images/default-user-image.png";
+       if(profilePicExp) profilePicExp.src = "/images/default-user-image.png";
+       if(profilePicMob) profilePicMob.src = "/images/default-user-image.png";
+    }
     getPublications();
 }
 
