@@ -126,7 +126,6 @@ function updateProfileDisplayName(name, surname) {
         const user = firebase.auth().currentUser;
         saveEmailInDatabase();
         saveIdInDatabase();
-        saveBlankPostsId();
 
         function saveEmailInDatabase() {
             firebase.database().ref('Users/' + user.uid + "/PublicRead/").update({
