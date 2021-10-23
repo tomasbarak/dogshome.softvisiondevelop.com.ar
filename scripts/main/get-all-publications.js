@@ -11,6 +11,7 @@ function getPublications(){
             var data = snapshot.val();
             console.log(data);
             deleteAllPublications(data);
+            setLoading(false);
         } else {
             console.log("No data available");
         }
@@ -20,6 +21,7 @@ function getPublications(){
 }
 function deleteAllPublications(data){
     const myNode = document.getElementById("content-show");
+    console.log("cleaning");
     if(myNode !== null){
         while (myNode.firstChild) {
             myNode.removeChild(myNode.lastChild);

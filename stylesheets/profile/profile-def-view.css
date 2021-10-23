@@ -64,6 +64,7 @@ html, body {
     align-items: center;
     justify-content: flex-start;
     flex-direction: column;
+    margin-top: 60px;
 }
 #profile-stats-cont-mobile{
     background-color: #e6e6e6;
@@ -72,7 +73,7 @@ html, body {
     border-radius: 15px;
     padding: 8px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
 }
@@ -122,12 +123,105 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 50px;
-    width: 100px;
+    height: 25px;
+    width: auto;
     background-color: #ff3333;
     border-radius: 5px;
     color: white;
     cursor: pointer;
+    box-sizing: border-box;
+    padding: 5px;
+    font-size: 14px;
+}
+#my-account-name-cont-desk{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 25px;
+    width: auto;
+    max-width: 50%;
+    border: 0px solid #079292;
+    background-color: transparent;
+    border-radius: 5px;
+    color: white;
+    margin-right: 15px;
+    box-sizing: border-box;
+    padding: 5px;
+}
+#my-account-name-text-desk{
+    font-weight: 600;
+    font-size: 14px;
+    color: #222222;
+}
+#my-account-name-cont{
+    max-width: 50%;
+    min-width: 50px;
+    background-color: transparent;
+    height: 25px;
+    border-radius: 8px;
+    margin-top: 10px;
+    border: 0px #079292 solid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 5px;
+}
+#my-account-name-text{
+    color: #222222;
+    font-family: 'Lato', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+
+}
+#social-media-info{
+    margin-top: 10px;
+}
+.social-link-cont{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.social-link{
+    cursor: pointer;
+    color: #079292;
+    font-size: 12px;
+    text-decoration: none;
+    margin-bottom: 5px;
+}
+.link-no-visible{
+    display: none;
+}
+#short-desc-cont{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    width: 100%;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 10px 5px;
+
+}
+#short-desc{
+    font-size: 12px;
+    color: #222222;
+}
+.content-show-account{
+    flex-direction: row;
+    overflow-x: visible;
+    overflow-y: auto;
+    max-width: none;
+    margin-top: 25px;
+    height: calc(752px - 316px) !important;
+    width: 100% !important;
+    align-items: start;
+    grid-auto-flow: column;
+    justify-content: start;;
 }
 @media screen and (max-width: 1024px){
     .desktop{

@@ -5,6 +5,10 @@ html, body {
     align-items: center;
     justify-content: center;
     overflow: auto;
+    min-height: 500px;
+    padding-bottom: 10px;
+    overflow-y: hidden !important;
+
 }
 
 * {
@@ -35,6 +39,7 @@ html, body {
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
+    padding: 0 15px;
     /*padding-top: 300px;*/
 }
 .input-container{
