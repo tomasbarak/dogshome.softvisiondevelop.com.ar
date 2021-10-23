@@ -1,5 +1,10 @@
+const posiblePaths = {
+    "/index.html":true,
+    "index.html":true,
+    "/":true
+}
 function addPublications(allPublications){
-    if((window.location.pathname).toString().includes("index.html")) {
+    if(posiblePaths[(window.location.pathname).toString()]) {
         for (let key in allPublications) {
             console.log(key, allPublications[key]);
             let publicationCreatedContainer = document.createElement('div');
@@ -10,10 +15,11 @@ function addPublications(allPublications){
             let publicationContainer = document.getElementById("content-show").appendChild(publicationCreatedContainer);
 
             let publicationCreatedImage = document.createElement('img');
-            publicationCreatedImage.className = 'publication-photo';
+            publicationCreatedImage.classList.add('publication-photo');
             publicationCreatedImage.loading = 'lazy';
             publicationCreatedImage.src = allPublications[key].Photo;
-
+            publicationCreatedImage.addEventListener('load', lazyImageLoad, false);
+            publicationCreatedImage.addEventListener('error', lazyImageError, false);
             let publicationImage = publicationContainer.appendChild(publicationCreatedImage);
 
             let publicationCreatedDescContainer = document.createElement('div');
@@ -45,5 +51,20 @@ function addPublications(allPublications){
 
         }
         setLoading(false)
-    }
+                
+        function lazyImageLoad(e){
+            e.currentTarget.parentNode.classList.remove('lazyImageWaiting');
+            console.log("lazyLoading")
+        }
+
+        function lazyImageError(e){
+            let parent = e.currentTarget.parentNode;
+            parent.classList.remove("lazyImageWaiting");
+            parent.classList.add("lazyImageError");
+            setTimeout(() => {
+                parent.classList.add("lazyImageErrorShow")
+            }, 60);
+            console.log("Error lazy")
+        }
+    }   
 }
