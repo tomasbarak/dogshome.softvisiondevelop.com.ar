@@ -223,7 +223,7 @@ html, body {
     grid-auto-flow: column;
     justify-content: start;;
 }
-@media screen and (max-width: 1024px){
+@media screen and (max-width: 1110px){
     .desktop{
         display: none !important;
     }
