@@ -23,7 +23,7 @@ html, body {
     width: 80%;
     height: 75%;
     max-width: 1024px;
-    max-height: 600px;
+    max-height: 300px;
     border-radius: 25px;
     display: flex;
     flex-direction: column;
@@ -222,6 +222,15 @@ html, body {
     align-items: start;
     grid-auto-flow: column;
     justify-content: start;;
+}
+#account-content-desk{
+    margin-top: 50px;
+}
+#content-show-desktop{
+    width: calc(100% - 20px);
+}
+#content-show{
+    width: 100%;
 }
 @media screen and (max-width: 1110px){
     .desktop{

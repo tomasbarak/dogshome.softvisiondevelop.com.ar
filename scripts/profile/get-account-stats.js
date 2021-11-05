@@ -52,7 +52,7 @@ function getAccountProfile(uid) {
             }
             if (data.PostsIds) {
                 console.log(data.PostsIds)
-                addMyPublications(data.PostsIds);
+                addMyPublications(data.PostsIds, myPublicationsCallback);
             }
             if (data.Type) {
                 if (data.Type !== 1) {
@@ -73,7 +73,7 @@ function getAccountProfile(uid) {
     });
 }
 
-function addMyPublications(PostsIds) {
+function addMyPublications(PostsIds, _callback) {
     let swappedPostsIds = {};
     for (let key in PostsIds) {
         swappedPostsIds[PostsIds[key]] = key;
@@ -133,6 +133,7 @@ function addMyPublications(PostsIds) {
         } else {
             console.log("No data available");
         }
+        _callback()
     }).catch((error) => {
         console.error(error);
     });

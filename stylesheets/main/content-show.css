@@ -13,6 +13,29 @@
     grid-gap: 25px;
     grid-template-columns: repeat(5, 1fr);
 }
+#content-show-desktop {
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+    width: 1024px !important;
+    height: 100%;
+    display: grid;
+    grid-gap: 25px;
+    grid-template-columns: repeat(5, 1fr);
+}
+#content-show-desktop::-webkit-scrollbar {
+    height: 10px;
+}
+#content-show-desktop::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+#content-show-desktop::-webkit-scrollbar-thumb {
+    background: #079292;
+    border-radius: 15px;
+}
+#content-show-desktop::-webkit-scrollbar-thumb:hover {
+    background: #067a7a;
+}
+
 .publication{
     transition: 0.25s;
     width: 240px;
