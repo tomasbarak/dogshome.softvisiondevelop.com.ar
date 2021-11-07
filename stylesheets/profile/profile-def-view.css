@@ -144,9 +144,12 @@ html, body {
     background-color: transparent;
     border-radius: 5px;
     color: white;
-    margin-right: 15px;
+    margin-right: 0;
     box-sizing: border-box;
     padding: 5px;
+}
+#sign-out-btn{
+    margin-left: 15px;
 }
 #my-account-name-text-desk{
     font-weight: 600;
@@ -324,6 +327,8 @@ html, body {
     flex-direction: column;
     align-items: flex-end;
     justify-content: flex-start;
+    box-sizing: border-box;
+    padding-right: 30px;
 }
 #contact-container{
     width: calc(100% - 104px);
@@ -332,6 +337,7 @@ html, body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
 }
 #contact-button{
     display: flex;

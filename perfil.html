@@ -93,7 +93,7 @@
             </a>
         </li>
         <li>
-            <a href="mi-cuenta.html">
+            <a href="perfil.html?u=mine">
                 <svg xmlns="http://www.w3.org/2000/svg" class="selected" viewBox="0 0 24 24" fill="#333" width="24" height="24">
                     <path fill-rule="evenodd"
                           d="M12 2.5a5.5 5.5 0 00-3.096 10.047 9.005 9.005 0 00-5.9 8.18.75.75 0 001.5.045 7.5 7.5 0 0114.993 0 .75.75 0 101.499-.044 9.005 9.005 0 00-5.9-8.181A5.5 5.5 0 0012 2.5zM8 8a4 4 0 118 0 4 4 0 01-8 0z"></path>
@@ -137,7 +137,7 @@
                 <div id="my-account-name-cont-desk">
                     <a id="my-account-name-text-desk">...</a>
                 </div>
-                <div onclick="showSignOutAlert()" class="profile-action-button">
+                <div id="sign-out-btn" onclick="showSignOutAlert()" class="profile-action-button">
                     <a>Cerrar sesión</a>
                 </div>
             </div>
@@ -255,12 +255,17 @@
 <script>
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {
-            readUserData(user);
-            getAccountProfile(user.uid);
+            readUserData();
+            let requestedUser = getRequestedUserQuery();
+            if(requestedUser === "mine"){
+                getAccountProfile(user.uid);
+            }else{
+                getAccountProfile(requestedUser);
+                document.getElementById("sign-out-btn").style.display = 'none';
+            }
             let userDisplayName = JSON.parse(user.displayName)
-            document.getElementById("my-account-name-text").innerText = userDisplayName.nameAndSurname.displayName;
+
             document.getElementById('exp-menu-name').innerText = userDisplayName.nameAndSurname.displayName;
-            document.getElementById("my-account-name-text-desk").innerText = userDisplayName.nameAndSurname.displayName;
             // ...
         } else {
             window.location.href = "signin.html";

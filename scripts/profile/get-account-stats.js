@@ -72,7 +72,7 @@ function getAccountProfile(uid) {
                 addMyPublications(data.PostsIds, myPublicationsCallback);
             }
             if (data.Type) {
-                if (data.Type !== 1) {
+                if (data.Type.TypeNum !== 1) {
                     let socialNetCont = document.getElementById('social-media-info');
                     socialNetCont.classList.remove('link-no-visible');
 
@@ -80,8 +80,14 @@ function getAccountProfile(uid) {
                     postsShowCont.classList.remove('link-no-visible')
                     if (data.RefName) {
                         document.getElementById("my-account-name-text").innerText = data.RefName;
-                        document.getElementById('exp-menu-name').innerText = data.RefName;
                         document.getElementById("my-account-name-text-desk").innerText = data.RefName;
+                    }
+                } else{
+                    if(data.Name && data.Surname){
+                        let completeName = data.Name + ' ' + data.Surname;
+                        document.getElementById("my-account-name-text").innerText = completeName;
+                        document.getElementById("my-account-name-text-desk").innerText = completeName;
+                        console.log("Es una persona", completeName)
                     }
                 }
             }
@@ -95,11 +101,16 @@ function getAccountProfile(uid) {
                         window.open(url, '_blank').focus();
                       }
                 }
+            }else{
+                document.getElementById("webpage-link-cont").style.display = 'none';
             }
             if(data.Id){
                 document.getElementById("contact-button").onclick = function(e) {
                     let url = 'https://dogshome.softvisiondevelop.com.ar/chat.html?u=' + data.Id;
                     window.open(url, '_blank').focus();
+                }
+                if (firebase.auth().currentUser.uid === uid){
+                    document.getElementById("contact-button").style.display = 'none';
                 }
             }
             
@@ -107,7 +118,12 @@ function getAccountProfile(uid) {
         getAccountStats(uid);
     });
 }
-
+function getRequestedUserQuery(){
+    const urlParams = new URLSearchParams(window.location.search);
+    const myParam = urlParams.get('u');
+    console.log("Params: " + myParam)
+    return myParam;
+}
 function addMyPublications(PostsIds, _callback) {
     let swappedPostsIds = {};
     for (let key in PostsIds) {

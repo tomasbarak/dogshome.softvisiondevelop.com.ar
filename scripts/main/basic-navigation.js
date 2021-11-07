@@ -5,5 +5,5 @@ function navigateToFavs(){
     window.location = "favoritos.html";
 }
 function navigateToProfile(profileId){
-    window.location = "mi-cuenta.html";
+    window.location = "perfil.html?u=mine";
 }
