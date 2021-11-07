@@ -29,20 +29,37 @@ function getAccountProfile(uid) {
                 let InstagramLinkCont = document.getElementById("instagram-link-cont");
                 let FacebooklinkCont = document.getElementById("facebook-link-cont");
                 let TwitterLinkCont = document.getElementById("twitter-link-cont");
+
+                let InstagramLinkDesk = document.getElementById("instagram-link-desk");
+                let FacebooklinkDesk = document.getElementById("facebook-link-desk");
+                let TwitterLinkDesk = document.getElementById("twitter-link-desk");
+
+                let InstagramLinkContDesk = document.getElementById("instagram-link-cont-desk");
+                let FacebooklinkContDesk = document.getElementById("facebook-link-cont-desk");
+                let TwitterLinkContDesk = document.getElementById("twitter-link-cont-desk");
                 if (data.SocialMedia.Instagram) {
                     let IGUser = data.SocialMedia.Instagram;
                     InstagramLink.href = "https://instagram.com/" + IGUser;
+                    InstagramLinkDesk.href = "https://instagram.com/" + IGUser;
+
                     InstagramLinkCont.classList.remove('link-no-visible')
+                    InstagramLinkContDesk.classList.remove('link-no-visible')
                 }
                 if (data.SocialMedia.Facebook) {
                     let FBUser = data.SocialMedia.Facebook;
                     Facebooklink.href = "https://facebook.com/" + FBUser;
+                    FacebooklinkDesk.href = "https://facebook.com/" + FBUser;
+
+                    FacebooklinkContDesk.classList.remove('link-no-visible')
                     FacebooklinkCont.classList.remove('link-no-visible')
                 }
                 if (data.SocialMedia.Twitter) {
                     let TWUser = data.SocialMedia.Twitter;
                     TwitterLink.href = "https://twitter.com/" + TWUser;
+                    TwitterLinkDesk.href = "https://twitter.com/" + TWUser;
+
                     TwitterLinkCont.classList.remove('link-no-visible')
+                    TwitterLinkContDesk.classList.remove('link-no-visible')
                 }
             }
             if (data.ShortDescription) {
@@ -68,6 +85,24 @@ function getAccountProfile(uid) {
                     }
                 }
             }
+            if(data.WebSite){
+                document.getElementById("website-link").innerText = data.WebSite;
+                if((data.WebSite).toString().includes("http://") || (data.WebSite).toString().includes("https://")){
+                    document.getElementById("webpage-link-cont").href = data.WebSite;
+                }else{
+                    document.getElementById("webpage-link-cont").onclick = function(event) {
+                        let url = 'https://' + data.WebSite;
+                        window.open(url, '_blank').focus();
+                      }
+                }
+            }
+            if(data.Id){
+                document.getElementById("contact-button").onclick = function(e) {
+                    let url = 'https://dogshome.softvisiondevelop.com.ar/chat.html?u=' + data.Id;
+                    window.open(url, '_blank').focus();
+                }
+            }
+            
         }
         getAccountStats(uid);
     });

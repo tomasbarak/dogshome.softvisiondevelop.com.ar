@@ -16,11 +16,14 @@
 #content-show-desktop {
     margin-left: 10px !important;
     margin-right: 10px !important;
-    width: 1024px !important;
+    width: 80% !important;
+    max-width: 1024px !important;
     height: 100%;
-    display: grid;
+    display: grid !important;
     grid-gap: 25px;
     grid-template-columns: repeat(5, 1fr);
+    overflow-x: scroll;
+    margin-top: 50px;
 }
 #content-show-desktop::-webkit-scrollbar {
     height: 10px;
@@ -33,6 +36,21 @@
     border-radius: 15px;
 }
 #content-show-desktop::-webkit-scrollbar-thumb:hover {
+    background: #067a7a;
+}
+
+
+#content-show::-webkit-scrollbar {
+    height: 10px;
+}
+#content-show::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+#content-show::-webkit-scrollbar-thumb {
+    background: #079292;
+    border-radius: 15px;
+}
+#content-show::-webkit-scrollbar-thumb:hover {
     background: #067a7a;
 }
 

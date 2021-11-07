@@ -232,6 +232,124 @@ html, body {
 #content-show{
     width: 100%;
 }
+#social-media-container-desktop{
+    width: calc(100% - 150px);
+    box-sizing: border-box;
+    margin-left: 15px;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.grid-item{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+#webpage-link-cont{
+    width: calc(100% - 210px);
+    height: 75px;
+    box-sizing: border-box;
+    padding-left: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+}
+#webpage-link-cont div{
+    border: 1px solid transparent;
+    display: flex;
+    margin-left: 10px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #079292;
+    border-radius: 15px;
+    padding: 3px 15px;
+    min-width: 200px;
+    max-width: calc(50% - 100px);
+    width: 100%;
+    color: #fff;
+    cursor: pointer;
+}
+#icon-cont{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#subsection-link-cont{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+#subsection-link-cont a{
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+    width: 185px;
+}
+#webpage-link-cont div a svg{
+    margin-right: 5px;
+    fill: white;
+}
+#webpage-link-cont div:hover{
+    transition-duration: 0.5s;
+    border: 1px solid #079292;
+}
+#media-info-section-desk{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+#social-media-cont-only{
+    width: calc(50%);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+#contact-info-section{
+    width: calc(50%);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+#contact-container{
+    width: calc(100% - 104px);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#contact-button{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    height: 50px;
+    width: fit-content;
+    box-sizing: border-box;
+    padding: 10px;
+    background-color: #079292;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#contact-button a{
+    margin-left: 10px;
+}
 @media screen and (max-width: 1110px){
     .desktop{
         display: none !important;
