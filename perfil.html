@@ -25,7 +25,7 @@
     <script src="scripts/alerts/page-alerts.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>Mi perfil</title>
-
+    <script>var publicationsIDS = [];</script>
 </head>
 <body onload="">
 
@@ -233,7 +233,7 @@
             </div>
         </div>
         <div id="content-show" class="content-show-account link-no-visible">
-
+            <img class="no-visible" id="posts-not-found-mob" src="images/account-publications-not-found.png" alt="No hay publicaciones"/>
         </div>
     </div>
 </div>
@@ -278,6 +278,14 @@
         let desktopPublications = document.getElementById("profile-view-cont").appendChild(document.getElementById("content-show").cloneNode(true));
         desktopPublications.id = "content-show-desktop"
         desktopPublications.className = "desktop"
+            
+        //desktopPublications.innerHTML = '<img class="no-visible" id="posts-not-found-mob" src="images/account-publications-not-found.png" alt="No hay publicaciones"/>';
+        for(let key in desktopPublications.childNodes){
+            console.log("Actual key: ", key)
+            desktopPublications.childNodes[key].onclick = function () {
+                window.location = "dog.html" + '?publication=' + publicationsIDS[key]
+            };
+        }
     }
 </script>
 </body>

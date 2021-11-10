@@ -1,6 +1,6 @@
 html, body {
     width: 100%;
-    height: 100%;
+    height: auto !important;
 }
 
 * {
@@ -103,7 +103,7 @@ html, body {
     display: none !important;
 }
 .desktop{
-    display: flex !important;
+    display: flex;
 }
 .stats-content{
     text-align: center;
@@ -220,11 +220,12 @@ html, body {
     overflow-y: auto;
     max-width: none;
     margin-top: 25px;
-    height: calc(752px - 316px) !important;
+    height: auto !important;
     width: 100% !important;
     align-items: start;
     grid-auto-flow: column;
-    justify-content: start;;
+    justify-content: start;
+    overflow-y: hidden;
 }
 #account-content-desk{
     margin-top: 50px;
@@ -358,6 +359,9 @@ html, body {
 }
 @media screen and (max-width: 1110px){
     .desktop{
+        display: none !important;
+    }
+    #content-show-desktop {
         display: none !important;
     }
     .mobile{

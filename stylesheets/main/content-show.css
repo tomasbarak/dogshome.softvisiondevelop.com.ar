@@ -18,12 +18,13 @@
     margin-right: 10px !important;
     width: 80% !important;
     max-width: 1024px !important;
-    height: 100%;
-    display: grid !important;
+    height: fit-content;
+    display: grid;
     grid-gap: 25px;
     grid-template-columns: repeat(5, 1fr);
     overflow-x: scroll;
     margin-top: 50px;
+    overflow-y: hidden;
 }
 #content-show-desktop::-webkit-scrollbar {
     height: 10px;

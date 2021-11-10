@@ -3,6 +3,7 @@ const posiblePaths = {
     "index.html":true,
     "/":true
 }
+
 function addPublications(allPublications){
     if(posiblePaths[(window.location.pathname).toString()]) {
         for (let key in allPublications) {

@@ -68,7 +68,7 @@ function getAccountProfile(uid) {
                 shortDescCont.innerText = ShortDescriptionText;
             }
             if (data.PostsIds) {
-                console.log(data.PostsIds)
+                console.log("My posts: ", data.PostsIds)
                 addMyPublications(data.PostsIds, myPublicationsCallback);
             }
             if (data.Type) {
@@ -125,69 +125,76 @@ function getRequestedUserQuery(){
     return myParam;
 }
 function addMyPublications(PostsIds, _callback) {
-    let swappedPostsIds = {};
-    for (let key in PostsIds) {
-        swappedPostsIds[PostsIds[key]] = key;
-    }
-    const dbRef = firebase.database().ref();
-    dbRef.child("Publications").get().then((snapshot) => {
-        if (snapshot.exists()) {
-            let publications = snapshot.val();
-            for (let key in publications) {
-                if (key in swappedPostsIds) {
-                    console.log(key, publications[key]);
-                    let publicationCreatedContainer = document.createElement('div');
-                    publicationCreatedContainer.className = 'publication';
-                    publicationCreatedContainer.onclick = function () {
-                        window.location = "dog.html" + '?publication=' + publications[key].Id
-                    };
-                    //publicationCreatedContainer.style.height = (Math.random() * (330 - 270 + 1) + 270) + "px";
-
-                    let publicationContainer = document.getElementById("content-show").appendChild(publicationCreatedContainer);
-
-                    let publicationCreatedImage = document.createElement('img');
-                    publicationCreatedImage.className = 'publication-photo';
-                    publicationCreatedImage.loading = 'lazy';
-                    publicationCreatedImage.src = publications[key].Photo;
-
-                    let publicationImage = publicationContainer.appendChild(publicationCreatedImage);
-
-                    let publicationCreatedDescContainer = document.createElement('div');
-                    publicationCreatedDescContainer.className = 'publication-desc-cont';
-
-                    let publicationDescContainer = publicationContainer.appendChild(publicationCreatedDescContainer);
-
-                    let publicationCreatedName = document.createElement('h1');
-                    publicationCreatedName.className = 'publication-name';
-                    publicationCreatedName.innerText = publications[key].Name;
-
-                    let publicationName = publicationDescContainer.appendChild(publicationCreatedName);
-
-                    let publicationCreatedDesc = document.createElement('p');
-                    publicationCreatedDesc.className = 'publication-description';
-                    publicationCreatedDesc.innerText = publications[key].SDescription;
-
-                    let publicationDesc = publicationDescContainer.appendChild(publicationCreatedDesc);
-
-                    let publicationCreatedRefNameCont = document.createElement('div');
-                    publicationCreatedRefNameCont.className = 'ref-name-cont';
-
-                    let publicationRefNameCont = publicationContainer.appendChild(publicationCreatedRefNameCont);
-
-                    let publicationCreatedRefName = document.createElement('a');
-                    publicationCreatedRefName.innerText = publications[key].Refugio;
-
-                    let publicationRefName = publicationRefNameCont.appendChild(publicationCreatedRefName);
-
-                }
-            }
-        } else {
-            console.log("No data available");
+    if(PostsIds.length > 0){
+        let swappedPostsIds = {};
+        for (let key in PostsIds) {
+            swappedPostsIds[PostsIds[key]] = key;
         }
-        _callback()
-    }).catch((error) => {
-        console.error(error);
-    });
+        console.log("Swapped: ", swappedPostsIds);
+        const dbRef = firebase.database().ref();
+        dbRef.child("Publications").get().then((snapshot) => {
+            if (snapshot.exists()) {
+                let publications = snapshot.val();
+                for (let key in publications) {
+                    if (key in swappedPostsIds) {
+                        console.log(key, publications[key]);
+                        let publicationCreatedContainer = document.createElement('div');
+                        publicationCreatedContainer.className = 'publication';
+                        publicationCreatedContainer.onclick = function () {
+                            window.location = "dog.html" + '?publication=' + publications[key].Id
+                        };
+                        console.log("Actual pub id: ", "dog.html" + '?publication=' + publications[key].Id)
+                        //publicationCreatedContainer.style.height = (Math.random() * (330 - 270 + 1) + 270) + "px";
+                        publicationsIDS.push(publications[key].Id);
+                        console.log("Pushing data", '' + publications[key].Id)
+                        let publicationContainer = document.getElementById("content-show").appendChild(publicationCreatedContainer);
+    
+                        let publicationCreatedImage = document.createElement('img');
+                        publicationCreatedImage.className = 'publication-photo';
+                        publicationCreatedImage.loading = 'lazy';
+                        publicationCreatedImage.src = publications[key].Photo;
+    
+                        let publicationImage = publicationContainer.appendChild(publicationCreatedImage);
+    
+                        let publicationCreatedDescContainer = document.createElement('div');
+                        publicationCreatedDescContainer.className = 'publication-desc-cont';
+    
+                        let publicationDescContainer = publicationContainer.appendChild(publicationCreatedDescContainer);
+    
+                        let publicationCreatedName = document.createElement('h1');
+                        publicationCreatedName.className = 'publication-name';
+                        publicationCreatedName.innerText = publications[key].Name;
+    
+                        let publicationName = publicationDescContainer.appendChild(publicationCreatedName);
+    
+                        let publicationCreatedDesc = document.createElement('p');
+                        publicationCreatedDesc.className = 'publication-description';
+                        publicationCreatedDesc.innerText = publications[key].SDescription;
+    
+                        let publicationDesc = publicationDescContainer.appendChild(publicationCreatedDesc);
+    
+                        let publicationCreatedRefNameCont = document.createElement('div');
+                        publicationCreatedRefNameCont.className = 'ref-name-cont';
+    
+                        let publicationRefNameCont = publicationContainer.appendChild(publicationCreatedRefNameCont);
+    
+                        let publicationCreatedRefName = document.createElement('a');
+                        publicationCreatedRefName.innerText = publications[key].Refugio;
+    
+                        let publicationRefName = publicationRefNameCont.appendChild(publicationCreatedRefName);
+    
+                    }
+                }
+            } else {
+                console.log("No data available");
+            }
+            _callback()
+        }).catch((error) => {
+            console.error(error);
+        });
+    }else{
+        
+    }
 }
 
 function setAccountStats(Stats) {
