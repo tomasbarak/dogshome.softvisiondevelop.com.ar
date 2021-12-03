@@ -1,8 +1,14 @@
 var actualInstance;
 var accTypeSelection;
 var usedInstances = [1];
+var conditionsReached = false;
+const omitibleInstances = [4, 7, 8];
 
 setBackButtonVisibility();
+
+setInterval(function(){
+    setSkipVisibility();
+}, 0)
 
 function setInicialInstance(inicialNumber){
     if(inicialNumber !== null || inicialNumber !== undefined){
@@ -14,9 +20,15 @@ function setInicialInstance(inicialNumber){
             }
             console.log('acutal instance does not exists but we can recover last session: ' + actualInstance)
         }else{
-            //console.log("nashenashe")
-            actualInstance = inicialNumber;
-            sessionStorage.setItem('sessionInstance', inicialNumber);
+            if(inicialNumber != undefined && inicialNumber != null){
+                console.log("aaashe initial: "+inicialNumber)
+                actualInstance = inicialNumber;
+                console.log("aaashe2 actual: "+actualInstance)
+                sessionStorage.setItem('sessionInstance', inicialNumber);
+            }else{
+                actualInstance = 1;
+                sessionStorage.setItem('sessionInstance', 1);
+            }
         }
     }else{
         //console.log("nashenashe2")
@@ -27,7 +39,6 @@ function setInicialInstance(inicialNumber){
     setBackButtonVisibility(Number(actualInstance))
     refreshInstances(Number(actualInstance));
     setLoading(false);
-
 }
 function setBackButtonVisibility(instance){
     if(instance <= 1 || instance === undefined || instance === null){
@@ -37,12 +48,20 @@ function setBackButtonVisibility(instance){
 
     }else{
         document.getElementById('back-button').style.display = 'flex';
-        console.log('nashe2');
-        console.log( actualInstance );
     }
 }
+
+function setSkipVisibility(){
+    const skipButton = document.getElementById('skip-btn');
+    if(omitibleInstances.includes(actualInstance)){
+        skipButton.style.display = "flex";
+    }else{
+        skipButton.style.display = "none";
+    }
+}
+
 function submitInstance(){
-    if(actualInstance < 6){
+    if(actualInstance < 10){
         console.log(actualInstance);
         switch (actualInstance){
             //email y contraseña
@@ -66,7 +85,15 @@ function submitInstance(){
                 break;
             //Nombre del refugio
             case 3:
+                const refInput = document.getElementById('refugio-name');
+                let refName = String(refInput.value.replace(/\s/g, '_').trim());
 
+                if(refName.length >= 3){
+                    saveRefName(refName);
+                }else{
+                    return;
+                }
+                saveRefName(refName);
                 break;
             //Foto de perfil
             case 4:
@@ -81,18 +108,48 @@ function submitInstance(){
                 break;
             //Descripcion corta
             case 6:
-                break;
-            //Descripcion larga
-            case 7:
+                let textarea = document.getElementById('short-desc');
+
+                if(textarea.value.length > 0){
+                    saveUserShortDesc(textarea.value);
+                }
+                console.log('Selected account type: ' + accTypeSelection);
+                if(accTypeSelection == 1){
+                    console.log("Before nashe" + actualInstance)
+                    actualInstance+=2;
+                    setBackButtonVisibility(actualInstance);
+                    sessionStorage.setItem('sessionInstance', actualInstance);
+                }
                 break;
             //Sitio web
-            case 8:
+            case 7:
+                let website = document.getElementById('website');
+
+                if(website.value.length > 0){
+                    saveUserWebSite(website.value)
+                }
+
                 break;
             //Redes sociales
-            case 9:
+            case 8:
+                let instagram = document.getElementById('instagram').value;
+                let facebook = document.getElementById('facebook').value;
+                let twitter = document.getElementById('twitter').value;
+                saveSocialMedia({instagram, facebook, twitter})
                 break;
             //Terminos y condiciones
-            case 10:
+            case 9:
+                const user = firebase.auth().currentUser;
+                firebase.database().ref('Users/' + user.uid + '/PublicRead').update({
+                        Finished: true
+                    }, (error) => {
+                        if (error) {
+                            console.log(error);
+                        } else {
+                            console.log("Success");
+                            window.location = "index.html"
+                        }
+                    });
                 break;
         }
         actualInstance ++;
@@ -102,20 +159,32 @@ function submitInstance(){
         setBackButtonVisibility(Number(actualInstance));
         sessionStorage.setItem('sessionInstance', actualInstance);
         refreshInstances(Number(actualInstance));
+        saveActualInstance(actualInstance);
     }
 
 }
 
+function skipInstance(instanceToSkip){
+if(omitibleInstances.includes(instanceToSkip)){
+    actualInstance++;
+    usedInstances.push(actualInstance);
+    setBackButtonVisibility(Number(actualInstance));
+    refreshInstances(Number(actualInstance));
+    saveActualInstance(actualInstance);
+    sessionStorage.setItem('sessionInstance', Number(actualInstance));
+}
+}
 function instanceGoBack(){
     if(actualInstance > 1){
         console.log("Es que si: " + usedInstances[usedInstances.length - 1]);
         usedInstances.pop();
         sessionStorage.setItem('instanceSequence', JSON.stringify(usedInstances));
-
+        console.log(Number(usedInstances[usedInstances.length - 1]))
         actualInstance =  Number(usedInstances[usedInstances.length - 1]);
-        setBackButtonVisibility(actualInstance);
-        sessionStorage.setItem('sessionInstance', actualInstance);
-        refreshInstances(actualInstance);
+        setBackButtonVisibility(Number(actualInstance));
+        sessionStorage.setItem('sessionInstance', Number(actualInstance));
+        refreshInstances(Number(actualInstance));
+        saveActualInstance(actualInstance);
     }
 }
 
@@ -154,21 +223,22 @@ function saveNameAndSurnameValues(){
 }
 function saveAccountType(selection){
     sessionStorage.setItem('sessionAccType', selection);
-}
-function saveRefName(name){
-    sessionStorage.setItem('sessionRefName', name);
+    saveAccType(selection);
 }
 function putProfileImage() {
     var image = document.getElementById('profile-image-upload-cont');
     var oFReader = new FileReader();
     oFReader.readAsDataURL(document.getElementById("upload-photo").files[0]);
-
+    console.log(document.getElementById("upload-photo").fullPatt)
     var fileName = document.getElementById("upload-photo").files[0].name;
     var idxDot = fileName.lastIndexOf(".") + 1;
     var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
-    if (extFile=="jpg" || extFile=="jpeg" || extFile=="png"){
+    if (extFile==="jpg" || extFile==="jpeg" || extFile==="png"){
         oFReader.onload = function (oFREvent) {
-            document.getElementById("profile-image-upload-cont").src = oFREvent.target.result
+            document.getElementById("profile-image-upload-cont").src = oFREvent.target.result;
+            //console.log(document.getElementById("upload-photo").files[0])
+            //console.log(oFREvent.target.result)
+            uploadPhotoCloudinary(oFREvent.target.result);
             document.getElementById("profile-image-upload-cont").style.objectFit = 'cover';
             document.getElementById("profile-image-upload-cont").style.width = '100%';
             document.getElementById("profile-image-upload-cont").style.height = '100%';
@@ -185,7 +255,7 @@ function formatPhoneNum(uncleanedPhone){
 
         console.log(cleaned);
         //Check if the input is of correct length
-        let match = cleaned.match(/^([0-9]{2})([0-9]{4})([0-9]{4})$/);
+        let match = cleaned.match(/^([0-9]{2,3})([0-9]{4})([0-9]{4})$/);
 
         console.log(match);
         if (match) {
@@ -203,7 +273,7 @@ function verifyPhoneFormat(uncleanedPhone){
 
         console.log(cleaned);
         //Check if the input is of correct length
-        let match = cleaned.match(/^([0-9]{2})([0-9]{4})([0-9]{4})$/);
+        let match = cleaned.match(/^([0-9]{2,3})([0-9]{4})([0-9]{4})$/);
 
         console.log(match);
         if (match) {
@@ -217,11 +287,12 @@ function verifyPhoneFormat(uncleanedPhone){
 }
 function saveSessionAccImage(){
     var bannerImage = document.getElementById('profile-image-upload-cont');
-    var imgData = getBase64Image(bannerImage);
-    sessionStorage.setItem("sessionAccImg", imgData);
+    var imgData = bannerImage.src;
+    sessionStorage.setItem("sessionAccImgEncoded", encodeURIComponent(imgData));
 }
 
 function getBase64Image(img) {
+    console.log(img.src)
     var canvas = document.createElement("canvas");
     canvas.width = img.width;
     canvas.height = img.height;
@@ -229,7 +300,8 @@ function getBase64Image(img) {
     var ctx = canvas.getContext("2d");
     ctx.drawImage(img, 0, 0);
 
-    var dataURL = canvas.toDataURL("image/png");
+    var dataURL = canvas.toDataURL();
 
-    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+    //console.log(dataURL);
+    return dataURL;
 }

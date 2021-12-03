@@ -26,6 +26,8 @@ function showPhoneVerificationSuccess(msg){
         text: msg,
         icon: 'success',
         confirmButtonColor: '#079292'
+    }).then(function (){
+        window.location = 'index.html'
     })
 }
 function showPhoneVerificationWrong(msg){

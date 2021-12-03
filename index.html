@@ -9,7 +9,9 @@
     <!-- iOS Safari -->
     <meta name="apple-mobile-web-app-status-bar-style" content="#079292">
     <title>DogsHome | Inicio</title>
-
+    <meta name="description" content="Adoptá y ayudá a los perros que más lo nececitan con DogsHome. DogsHome es un sitio de adopción de perros online,
+                                      con algunas funcionalidades extras, como localizar perros perdidos, reportar perros perdidos, area de noticias,
+                                      y mucho más. Visitá DogsHome para enterarte de todo." data-head-react="true">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <script src="scripts/main/basic-navigation.js"></script>
@@ -27,6 +29,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7008107843388819"
+     crossorigin="anonymous"></script>
 
 </head>
 <body>
@@ -66,7 +70,7 @@
     <div class="expandible-menu-invisible" id="expandible-menu">
         <div class="expandible-menu-option-cont" id="name-option-exp-menu">
             <img class="" id="profile-pic-exp-menu" src="animations/image-loading.gif" alt="profile pic" style="height: 55px; width: 55px; cursor: pointer; margin-right: 10px; user-select: none; border-radius: 80px; object-fit: cover">
-            <a id="exp-menu-name"></a>
+            <a id="exp-menu-name"> </a>
         </div>
         <ul class="exp-options-container">
             <li>
@@ -88,7 +92,7 @@
                 </a>
             </li>
             <li>
-                <a href="mi-cuenta.html">
+                <a href="perfil.html?u=mine">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#333" width="24" height="24"><path fill-rule="evenodd" d="M12 2.5a5.5 5.5 0 00-3.096 10.047 9.005 9.005 0 00-5.9 8.18.75.75 0 001.5.045 7.5 7.5 0 0114.993 0 .75.75 0 101.499-.044 9.005 9.005 0 00-5.9-8.181A5.5 5.5 0 0012 2.5zM8 8a4 4 0 118 0 4 4 0 01-8 0z"></path></svg>
                     <span>Mi perfil</span>
                 </a>
@@ -158,8 +162,7 @@
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {
             if(user.emailVerified === true){
-                var uid = firebase.auth().currentUser.uid;
-                readUserData(uid);
+                checkProfile(user);
             }else{
                 window.location = "verification.html";
             }
