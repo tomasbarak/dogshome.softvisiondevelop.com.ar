@@ -1,11 +1,10 @@
 function getAccountProfile(uid) {
-    let baseUrl = 'http://127.0.0.1:3000'
+    let baseUrl = 'http://181.165.59.49'
     let route = '/user/' + uid + '/profile';
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.responseType = 'json';
     xmlHttp.open( "GET", baseUrl + route, true ); // false for synchronous request
     xmlHttp.send( null );
-    var getData = firebase.database().ref('Users/' + uid + '/PublicRead');
 
     xmlHttp.onload = function(){
         const data = xmlHttp.response;
@@ -203,7 +202,7 @@ function addMyPublications(PostsIds, _callback) {
 }
 
 function setAccountStats(Stats) {
-    if (Stats != null) {
+    if (Stats != null && Stats.length > 0) {
         if (Stats.Following) {
             document.getElementById("profile-following").innerText = Stats.Following.length
         }
@@ -231,10 +230,21 @@ function setAccountPostsQ(PostsCount) {
 }
 
 function getAccountStats(uid) {
-    var getData = firebase.database().ref('Users/' + uid + '/PublicWrite/Stats');
+    firebase.auth().currentUser.getIdToken(true).then(function (idToken) {
+        console.log(idToken)
+    let baseUrl = 'http://181.165.59.49'
+    let route = '/user/' + uid + '/stats';
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.responseType = 'json';
+    xmlHttp.open( "GET", baseUrl + route, true ); // false for synchronous request
+    xmlHttp.setRequestHeader('authToken', idToken);
+    xmlHttp.send( null );
 
-    getData.on('value', (snapshot) => {
-        const data = snapshot.val();
+    xmlHttp.onload = function(){
+        const data = xmlHttp.response;
         setAccountStats(data);
-    });
+    }
+}).catch(function(error) {
+    console.log(error)
+});
 }
