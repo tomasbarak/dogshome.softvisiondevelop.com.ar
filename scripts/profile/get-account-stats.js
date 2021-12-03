@@ -1,9 +1,14 @@
 function getAccountProfile(uid) {
-
+    let baseUrl = 'http://127.0.0.1:3000'
+    let route = '/user/' + uid + '/profile';
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.responseType = 'json';
+    xmlHttp.open( "GET", baseUrl + route, true ); // false for synchronous request
+    xmlHttp.send( null );
     var getData = firebase.database().ref('Users/' + uid + '/PublicRead');
 
-    getData.get().then((snapshot) => {
-        const data = snapshot.val();
+    xmlHttp.onload = function(){
+        const data = xmlHttp.response;
         if (data) {
             if (data.Photo) {
                 document.getElementById("profile-view-image").src = data.Photo;
@@ -115,8 +120,8 @@ function getAccountProfile(uid) {
             }
             
         }
+    }
         getAccountStats(uid);
-    });
 }
 function getRequestedUserQuery(){
     const urlParams = new URLSearchParams(window.location.search);
