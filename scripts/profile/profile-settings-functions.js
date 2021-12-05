@@ -21,12 +21,40 @@ function checkProfile(user){
 }
 
 function readUserData(){
-    let user = firebase.auth().currentUser;
-    console.log(user)
-    let displayNameJSON =  JSON.parse(user.displayName);
-    console.log(displayNameJSON);
-    setProfileName(displayNameJSON);
-    setProfileImage(user.photoURL);
+    firebase.auth().currentUser.getIdToken(true).then(function (idToken) {
+    const uid = firebase.auth().currentUser.uid;
+    let baseUrl = 'https://127.0.0.1'
+    async function getDisplayName(){
+        let route = '/user/' + uid + '/displayName';
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.responseType = 'json';
+        xmlHttp.open( "GET", baseUrl + route, true ); // false for synchronous request
+        xmlHttp.setRequestHeader('authToken', idToken);
+        xmlHttp.send( null );
+        xmlHttp.onload = function(){
+            let displayNameJSON = xmlHttp.response;
+            console.log(displayNameJSON);
+            setProfileName(displayNameJSON);
+        }
+    }
+    async function getPhotoURL(){
+        let route = '/user/' + uid + '/photourl';
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.responseType = 'text';
+        xmlHttp.open( "GET", baseUrl + route, true ); // false for synchronous request
+        xmlHttp.setRequestHeader('authToken', idToken);
+        xmlHttp.send( null );
+        xmlHttp.onload = function(){
+            let photoURL = xmlHttp.responseText;
+            console.log(photoURL);
+            setProfileImage(photoURL);
+        }
+    }
+    getPhotoURL();
+    getDisplayName();
+}).catch(function (error) {
+    console.log(error);
+});
 }
 
 function setProfileImage(photo){
