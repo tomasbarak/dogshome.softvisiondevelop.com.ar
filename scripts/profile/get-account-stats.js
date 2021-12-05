@@ -1,5 +1,5 @@
 function getAccountProfile(uid) {
-    let baseUrl = 'https://api.dogshome.softvisiondevelop.com.ar:8443'
+    let baseUrl = 'https://api.dogshome.softvisiondevelop.com.ar'
     let route = '/user/' + uid + '/profile';
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.responseType = 'json';
@@ -232,7 +232,7 @@ function setAccountPostsQ(PostsCount) {
 function getAccountStats(uid) {
     firebase.auth().currentUser.getIdToken(true).then(function (idToken) {
         console.log(idToken)
-    let baseUrl = 'https://api.dogshome.softvisiondevelop.com.ar:8443';
+    let baseUrl = 'https://api.dogshome.softvisiondevelop.com.ar';
     let route = '/user/' + uid + '/stats';
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.responseType = 'json';
