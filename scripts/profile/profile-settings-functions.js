@@ -23,7 +23,7 @@ function checkProfile(user){
 function readUserData(){
     firebase.auth().currentUser.getIdToken(true).then(function (idToken) {
     const uid = firebase.auth().currentUser.uid;
-    let baseUrl = 'https://127.0.0.1'
+    let baseUrl = 'https://api.softvisiondevelop.com.ar'
     async function getDisplayName(){
         let route = '/user/' + uid + '/displayName';
         var xmlHttp = new XMLHttpRequest();
