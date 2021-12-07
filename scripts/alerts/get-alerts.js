@@ -1,4 +1,14 @@
 function get_all_alerts(map){
+    let baseUrl = 'https://api.softvisiondevelop.com.ar'
+    let route = '/alerts/all';
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.responseType = 'json';
+    xmlHttp.open( "GET", baseUrl + route, true ); // false for synchronous request
+    xmlHttp.send( null );
+
+    xmlHttp.onload = function(){
+
+    }
     const dbRef = firebase.database().ref();
     dbRef.child("Alerts").get().then((snapshot) => {
         if (snapshot.exists()) {

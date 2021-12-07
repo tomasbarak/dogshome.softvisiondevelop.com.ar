@@ -1,8 +1,14 @@
 function getPublication(id){
-    const dbRef = firebase.database().ref();
-    dbRef.child("Publications").child(id).get().then((snapshot) => {
-        if (snapshot.exists()) {
-            var data = snapshot.val();
+    let baseUrl = 'https://api.softvisiondevelop.com.ar'
+    let route = `/publications/${id}`;
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.responseType = 'json';
+    xmlHttp.open( "GET", baseUrl + route, true ); // false for synchronous request
+    xmlHttp.send( null );
+
+    xmlHttp.onload = function(){
+        let data = xmlHttp.response;
+        if(data){
             console.log(data);
             document.getElementById("post-image").src = data.Photo;
             document.getElementById("primary-image-min").src = data.Photo;
@@ -19,12 +25,9 @@ function getPublication(id){
             addSecondaryPhotos(data.Images);
             createSlider(data.Images, data.Photo);
             document.getElementById("error-container").className = "error-container-invisible";
-        } else {
+        }else{
             throwDontMatchError();
         }
-    }).catch((error) => {
-        console.error(error);
-        throwGenericError(error);
-    });
+    }
 }
 

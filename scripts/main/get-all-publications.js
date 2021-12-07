@@ -1,24 +1,24 @@
 function getPublications(){
-    /*var getData = firebase.database().ref('Publications/');
-    getData.on('value', (snapshot) => {
-        const data = snapshot.val();
-        console.log(data);
-        addPublications(data);
-    });*/
-    const dbRef = firebase.database().ref();
-    dbRef.child("Publications").get().then((snapshot) => {
-        if (snapshot.exists()) {
-            var data = snapshot.val();
+    let baseUrl = 'https://api.softvisiondevelop.com.ar'
+    let route = '/publications/all';
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.responseType = 'json';
+    xmlHttp.open( "GET", baseUrl + route, true ); // false for synchronous request
+    xmlHttp.send( null );
+
+    xmlHttp.onload = function(){
+        let data = xmlHttp.response;
+        if(data){
             console.log(data);
             deleteAllPublications(data);
             setLoading(false);
-        } else {
+        }else{
             console.log("No data available");
+
         }
-    }).catch((error) => {
-        console.error(error);
-    });
+    }
 }
+
 function deleteAllPublications(data){
     const myNode = document.getElementById("content-show");
     console.log("cleaning");
