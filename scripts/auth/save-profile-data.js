@@ -97,29 +97,37 @@ function updateProfileDisplayName(name, surname) {
     }
 
     function uploadPhotoCloudinary(img) {
-        var xhr = new XMLHttpRequest();
-        const user = firebase.auth().currentUser;
-        xhr.addEventListener("load", function () {
-            var response = JSON.parse(xhr.responseText);
-            var photoUrl = response.url;
-            updateProfilePhoto(photoUrl);
-            savePhotoInDatabase(photoUrl);
-        });
-        xhr.open('POST', 'https://coral-newt-2178.twil.io/uploadPhoto', true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.send('p=' + encodeURIComponent(img));
-
-        function savePhotoInDatabase(photoURL) {
-            firebase.database().ref('Users/' + user.uid + "/PublicRead/").update({
-                Photo: photoURL
-            }, (error) => {
-                if (error) {
-                    console.log(error);
-                } else {
-                    console.log("Success");
-                }
+        console.log(img)
+        firebase.auth().currentUser.getIdToken(true).then(function (idToken) {
+            var xhr = new XMLHttpRequest();
+            var formdata = new FormData();
+            formdata.append('upload', img);
+            const user = firebase.auth().currentUser;
+            xhr.addEventListener("load", function () {
+                var response = JSON.parse(xhr.responseText);
+                var photoUrl = response.url;
+                updateProfilePhoto(photoUrl);
+                savePhotoInDatabase(photoUrl);
             });
-        }
+            xhr.open('POST', 'https://api.softvisiondevelop.com.ar/profile/upload/image/', true);
+            xhr.setRequestHeader('authtoken', idToken);
+            xhr.send(formdata);
+    
+            function savePhotoInDatabase(photoURL) {
+                firebase.database().ref('Users/' + user.uid + "/PublicRead/").update({
+                    Photo: photoURL
+                }, (error) => {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                        console.log("Success");
+                    }
+                });
+            }
+        }).catch(function (error) {
+
+        })
+        
     }
 
     function saveFirstBlankData() {

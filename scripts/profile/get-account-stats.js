@@ -3,10 +3,10 @@ function getAccountProfile(uid) {
     let route = '/user/' + uid + '/profile';
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.responseType = 'json';
-    xmlHttp.open( "GET", baseUrl + route, true ); // false for synchronous request
-    xmlHttp.send( null );
+    xmlHttp.open("GET", baseUrl + route, true); // false for synchronous request
+    xmlHttp.send(null);
 
-    xmlHttp.onload = function(){
+    xmlHttp.onload = function () {
         const data = xmlHttp.response;
         if (data) {
             if (data.Photo) {
@@ -86,8 +86,8 @@ function getAccountProfile(uid) {
                         document.getElementById("my-account-name-text").innerText = data.RefName;
                         document.getElementById("my-account-name-text-desk").innerText = data.RefName;
                     }
-                } else{
-                    if(data.Name && data.Surname){
+                } else {
+                    if (data.Name && data.Surname) {
                         let completeName = data.Name + ' ' + data.Surname;
                         document.getElementById("my-account-name-text").innerText = completeName;
                         document.getElementById("my-account-name-text-desk").innerText = completeName;
@@ -95,156 +95,162 @@ function getAccountProfile(uid) {
                     }
                 }
             }
-            if(data.WebSite){
+            if (data.WebSite) {
                 document.getElementById("website-link").innerText = data.WebSite;
-                if((data.WebSite).toString().includes("http://") || (data.WebSite).toString().includes("https://")){
+                if ((data.WebSite).toString().includes("http://") || (data.WebSite).toString().includes("https://")) {
                     document.getElementById("webpage-link-cont").href = data.WebSite;
-                }else{
-                    document.getElementById("webpage-link-cont").onclick = function(event) {
+                } else {
+                    document.getElementById("webpage-link-cont").onclick = function (event) {
                         let url = 'https://' + data.WebSite;
                         window.open(url, '_blank').focus();
-                      }
+                    }
                 }
-            }else{
+            } else {
                 document.getElementById("webpage-link-cont").style.display = 'none';
             }
-            if(data.Id){
-                document.getElementById("contact-button").onclick = function(e) {
+            if (data.Id) {
+                document.getElementById("contact-button").onclick = function (e) {
                     let url = 'https://dogshome.softvisiondevelop.com.ar/chat.html?u=' + data.Id;
                     window.open(url, '_blank').focus();
                 }
-                if (firebase.auth().currentUser.uid === uid){
+                if (firebase.auth().currentUser.uid === uid) {
                     document.getElementById("contact-button").style.display = 'none';
                 }
             }
-            
+
         }
     }
-        getAccountStats(uid);
+    getAccountStats(uid);
 }
-function getRequestedUserQuery(){
+function getRequestedUserQuery() {
     const urlParams = new URLSearchParams(window.location.search);
     const myParam = urlParams.get('u');
     console.log("Params: " + myParam)
     return myParam;
 }
 function addMyPublications(PostsIds, _callback) {
-    if(PostsIds.length > 0){
+    if (PostsIds) {
         let swappedPostsIds = {};
         for (let key in PostsIds) {
             swappedPostsIds[PostsIds[key]] = key;
         }
         console.log("Swapped: ", swappedPostsIds);
-        const dbRef = firebase.database().ref();
-        dbRef.child("Publications").get().then((snapshot) => {
-            if (snapshot.exists()) {
-                let publications = snapshot.val();
-                for (let key in publications) {
-                    if (key in swappedPostsIds) {
-                        console.log(key, publications[key]);
-                        let publicationCreatedContainer = document.createElement('div');
-                        publicationCreatedContainer.className = 'publication';
-                        publicationCreatedContainer.onclick = function () {
-                            window.location = "dog.html" + '?publication=' + publications[key].Id
-                        };
-                        console.log("Actual pub id: ", "dog.html" + '?publication=' + publications[key].Id)
-                        //publicationCreatedContainer.style.height = (Math.random() * (330 - 270 + 1) + 270) + "px";
-                        publicationsIDS.push(publications[key].Id);
-                        console.log("Pushing data", '' + publications[key].Id)
-                        let publicationContainer = document.getElementById("content-show").appendChild(publicationCreatedContainer);
-    
-                        let publicationCreatedImage = document.createElement('img');
-                        publicationCreatedImage.className = 'publication-photo';
-                        publicationCreatedImage.loading = 'lazy';
-                        publicationCreatedImage.src = publications[key].Photo;
-    
-                        let publicationImage = publicationContainer.appendChild(publicationCreatedImage);
-    
-                        let publicationCreatedDescContainer = document.createElement('div');
-                        publicationCreatedDescContainer.className = 'publication-desc-cont';
-    
-                        let publicationDescContainer = publicationContainer.appendChild(publicationCreatedDescContainer);
-    
-                        let publicationCreatedName = document.createElement('h1');
-                        publicationCreatedName.className = 'publication-name';
-                        publicationCreatedName.innerText = publications[key].Name;
-    
-                        let publicationName = publicationDescContainer.appendChild(publicationCreatedName);
-    
-                        let publicationCreatedDesc = document.createElement('p');
-                        publicationCreatedDesc.className = 'publication-description';
-                        publicationCreatedDesc.innerText = publications[key].SDescription;
-    
-                        let publicationDesc = publicationDescContainer.appendChild(publicationCreatedDesc);
-    
-                        let publicationCreatedRefNameCont = document.createElement('div');
-                        publicationCreatedRefNameCont.className = 'ref-name-cont';
-    
-                        let publicationRefNameCont = publicationContainer.appendChild(publicationCreatedRefNameCont);
-    
-                        let publicationCreatedRefName = document.createElement('a');
-                        publicationCreatedRefName.innerText = publications[key].Refugio;
-    
-                        let publicationRefName = publicationRefNameCont.appendChild(publicationCreatedRefName);
-    
+
+        let baseUrl = 'https://api.softvisiondevelop.com.ar'
+        let route = '/publications/all/';
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.responseType = 'json';
+        xmlHttp.open("GET", baseUrl + route, true); // false for synchronous request
+        xmlHttp.send(null);
+
+        xmlHttp.onload = function () {
+            console.log("Publications: ", xmlHttp.response);
+            let publications = xmlHttp.response;
+                if (publications) {
+                    for (let key in publications) {
+                        if (key in swappedPostsIds) {
+                            console.log(key, publications[key]);
+                            let publicationCreatedContainer = document.createElement('div');
+                            publicationCreatedContainer.className = 'publication';
+                            publicationCreatedContainer.onclick = function () {
+                                window.location = "dog.html" + '?publication=' + publications[key].Id
+                            };
+                            console.log("Actual pub id: ", "dog.html" + '?publication=' + publications[key].Id)
+                            //publicationCreatedContainer.style.height = (Math.random() * (330 - 270 + 1) + 270) + "px";
+                            publicationsIDS.push(publications[key].Id);
+                            console.log("Pushing data", '' + publications[key].Id)
+                            let publicationContainer = document.getElementById("content-show").appendChild(publicationCreatedContainer);
+
+                            let publicationCreatedImage = document.createElement('img');
+                            publicationCreatedImage.className = 'publication-photo';
+                            publicationCreatedImage.loading = 'lazy';
+                            publicationCreatedImage.src = publications[key].Photo;
+
+                            let publicationImage = publicationContainer.appendChild(publicationCreatedImage);
+
+                            let publicationCreatedDescContainer = document.createElement('div');
+                            publicationCreatedDescContainer.className = 'publication-desc-cont';
+
+                            let publicationDescContainer = publicationContainer.appendChild(publicationCreatedDescContainer);
+
+                            let publicationCreatedName = document.createElement('h1');
+                            publicationCreatedName.className = 'publication-name';
+                            publicationCreatedName.innerText = publications[key].Name;
+
+                            let publicationName = publicationDescContainer.appendChild(publicationCreatedName);
+
+                            let publicationCreatedDesc = document.createElement('p');
+                            publicationCreatedDesc.className = 'publication-description';
+                            publicationCreatedDesc.innerText = publications[key].SDescription;
+
+                            let publicationDesc = publicationDescContainer.appendChild(publicationCreatedDesc);
+
+                            let publicationCreatedRefNameCont = document.createElement('div');
+                            publicationCreatedRefNameCont.className = 'ref-name-cont';
+
+                            let publicationRefNameCont = publicationContainer.appendChild(publicationCreatedRefNameCont);
+
+                            let publicationCreatedRefName = document.createElement('a');
+                            publicationCreatedRefName.innerText = publications[key].Refugio;
+
+                            let publicationRefName = publicationRefNameCont.appendChild(publicationCreatedRefName);
+
+                        }
                     }
+                } else {
+                    console.log("No data available");
                 }
-            } else {
-                console.log("No data available");
+                _callback()
+        }
+        }else {
+
+        }
+    }
+
+    function setAccountStats(Stats) {
+        if (Stats != null && Stats.length > 0) {
+            if (Stats.Following) {
+                document.getElementById("profile-following").innerText = Stats.Following.length
             }
-            _callback()
-        }).catch((error) => {
-            console.error(error);
+            if (Stats.Following) {
+                document.getElementById("profile-following-mobile").innerText = Stats.Following.length
+            }
+            if (Stats.Followers) {
+                document.getElementById("profile-followers").innerText = Stats.Followers.length
+            }
+            if (Stats.Followers) {
+                document.getElementById("profile-followers-mobile").innerText = Stats.Followers.length
+            }
+        } else {
+            document.getElementById("profile-following").innerText = '0'
+            document.getElementById("profile-following-mobile").innerText = '0'
+            document.getElementById("profile-followers-mobile").innerText = '0'
+            document.getElementById("profile-followers").innerText = '0'
+        }
+    }
+
+    function setAccountPostsQ(PostsCount) {
+        document.getElementById("profile-posts").innerText = PostsCount;
+
+        document.getElementById("profile-posts-mobile").innerText = PostsCount;
+    }
+
+    function getAccountStats(uid) {
+        firebase.auth().currentUser.getIdToken(true).then(function (idToken) {
+            console.log(idToken)
+            let baseUrl = 'https://api.softvisiondevelop.com.ar';
+            let route = '/user/' + uid + '/stats';
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.responseType = 'json';
+            xmlHttp.open("GET", baseUrl + route, true); // false for synchronous request
+            xmlHttp.setRequestHeader('authToken', idToken);
+            xmlHttp.send(null);
+
+            xmlHttp.onload = function () {
+                const data = xmlHttp.response;
+                setAccountStats(data);
+            }
+        }).catch(function (error) {
+            console.log(error)
         });
-    }else{
-        
     }
-}
-
-function setAccountStats(Stats) {
-    if (Stats != null && Stats.length > 0) {
-        if (Stats.Following) {
-            document.getElementById("profile-following").innerText = Stats.Following.length
-        }
-        if (Stats.Following) {
-            document.getElementById("profile-following-mobile").innerText = Stats.Following.length
-        }
-        if (Stats.Followers) {
-            document.getElementById("profile-followers").innerText = Stats.Followers.length
-        }
-        if (Stats.Followers) {
-            document.getElementById("profile-followers-mobile").innerText = Stats.Followers.length
-        }
-    } else {
-        document.getElementById("profile-following").innerText = '0'
-        document.getElementById("profile-following-mobile").innerText = '0'
-        document.getElementById("profile-followers-mobile").innerText = '0'
-        document.getElementById("profile-followers").innerText = '0'
-    }
-}
-
-function setAccountPostsQ(PostsCount) {
-    document.getElementById("profile-posts").innerText = PostsCount;
-
-    document.getElementById("profile-posts-mobile").innerText = PostsCount;
-}
-
-function getAccountStats(uid) {
-    firebase.auth().currentUser.getIdToken(true).then(function (idToken) {
-        console.log(idToken)
-    let baseUrl = 'https://api.softvisiondevelop.com.ar';
-    let route = '/user/' + uid + '/stats';
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.responseType = 'json';
-    xmlHttp.open( "GET", baseUrl + route, true ); // false for synchronous request
-    xmlHttp.setRequestHeader('authToken', idToken);
-    xmlHttp.send( null );
-
-    xmlHttp.onload = function(){
-        const data = xmlHttp.response;
-        setAccountStats(data);
-    }
-}).catch(function(error) {
-    console.log(error)
-});
-}

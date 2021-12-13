@@ -238,7 +238,7 @@ function putProfileImage() {
             document.getElementById("profile-image-upload-cont").src = oFREvent.target.result;
             //console.log(document.getElementById("upload-photo").files[0])
             //console.log(oFREvent.target.result)
-            uploadPhotoCloudinary(oFREvent.target.result);
+            uploadPhotoCloudinary(document.getElementById("upload-photo").files[0]);
             document.getElementById("profile-image-upload-cont").style.objectFit = 'cover';
             document.getElementById("profile-image-upload-cont").style.width = '100%';
             document.getElementById("profile-image-upload-cont").style.height = '100%';
