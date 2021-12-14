@@ -1,11 +1,18 @@
 const posiblePaths = {
     "/index.html":true,
     "index.html":true,
-    "/":true
+    "/":true,
+    "perfil.html":true,
+    "/perfil.html":true,
+    "/dogshome.softvisiondevelop.com.ar/index.html":true,
+    "dogshome.softvisiondevelop.com.ar/index.html":true,
+    "/dogshome.softvisiondevelop.com.ar/perfil.html":true,
+    "dogshome.softvisiondevelop.com.ar/perfil.html":true,
 }
 
 function addPublications(allPublications){
     if(posiblePaths[(window.location.pathname).toString()]) {
+        console.log("Adding publications")
         for (let key in allPublications) {
             console.log(key, allPublications[key]);
             let publicationCreatedContainer = document.createElement('div');

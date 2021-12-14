@@ -32,8 +32,8 @@ function readUserData(){
         xmlHttp.setRequestHeader('authToken', idToken);
         xmlHttp.send( null );
         xmlHttp.onload = function(){
+            console.log("Got displayname", xmlHttp.response)
             let displayNameJSON = xmlHttp.response;
-            console.log(displayNameJSON);
             setProfileName(displayNameJSON);
         }
     }
@@ -70,7 +70,7 @@ function setProfileImage(photo){
        if(profilePicExp) profilePicExp.src = "/images/default-user-image.png";
        if(profilePicMob) profilePicMob.src = "/images/default-user-image.png";
     }
-        getPublications();
+    getPublications();
 }
 
 function setProfileName(name){

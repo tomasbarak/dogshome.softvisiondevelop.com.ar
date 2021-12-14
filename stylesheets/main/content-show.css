@@ -133,10 +133,12 @@
     color: #079292;
     font-family: Lato, sans-serif;
 }
-
-@media screen and (min-width: 1300px){
+.no-visible{
+    display: none;
+}
+@media screen and (min-width: 1885px){
     #content-show{
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: repeat(7, 1fr);
     }
 }
 @media screen and (max-width: 1300px){

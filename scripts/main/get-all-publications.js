@@ -9,7 +9,7 @@ function getPublications(){
     xmlHttp.onload = function(){
         let data = xmlHttp.response;
         if(data){
-            console.log(data);
+            console.log("nashe", data);
             deleteAllPublications(data);
             setLoading(false);
         }else{
@@ -27,6 +27,7 @@ function deleteAllPublications(data){
             myNode.removeChild(myNode.lastChild);
         }
         addPublications(data);
+        console.log("addedpubs")
 
     }
 }
