@@ -97,16 +97,23 @@ function getAccountProfile(uid) {
             }
             if (data.WebSite) {
                 document.getElementById("website-link").innerText = data.WebSite;
+                document.getElementById("website-link-mobile").innerText = data.WebSite;
                 if ((data.WebSite).toString().includes("http://") || (data.WebSite).toString().includes("https://")) {
                     document.getElementById("webpage-link-cont").href = data.WebSite;
+                    document.getElementById("website-link-mobile").href = data.WebSite;
                 } else {
                     document.getElementById("webpage-link-cont").onclick = function (event) {
+                        let url = 'https://' + data.WebSite;
+                        window.open(url, '_blank').focus();
+                    }
+                    document.getElementById("webpage-link-cont-mobile").onclick = function (event) {
                         let url = 'https://' + data.WebSite;
                         window.open(url, '_blank').focus();
                     }
                 }
             } else {
                 document.getElementById("webpage-link-cont").style.display = 'none';
+                document.getElementById("webpage-link-cont-mobile").style.display = 'none';
             }
             if (data.Id) {
                 document.getElementById("contact-button").onclick = function (e) {

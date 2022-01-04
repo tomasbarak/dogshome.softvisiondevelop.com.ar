@@ -263,10 +263,34 @@ html, body {
     justify-content: center;
 
 }
+#webpage-link-cont-mobile{
+    width: auto;
+    height: 75px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+}
 #webpage-link-cont div{
     border: 1px solid transparent;
     display: flex;
     margin-left: 10px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #079292;
+    border-radius: 15px;
+    padding: 3px 15px;
+    min-width: 200px;
+    max-width: calc(50% - 100px);
+    width: 100%;
+    color: #fff;
+    cursor: pointer;
+}
+#webpage-link-cont-mobile div{
+    border: 1px solid transparent;
+    display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
@@ -284,7 +308,18 @@ html, body {
     align-items: center;
     justify-content: center;
 }
+#icon-cont-mobile{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 #subsection-link-cont{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+#subsection-link-cont-mobile{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -297,11 +332,26 @@ html, body {
     text-overflow: ellipsis;
     width: 185px;
 }
+#subsection-link-cont-mobile a{
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+    width: 185px;
+}
 #webpage-link-cont div a svg{
     margin-right: 5px;
     fill: white;
 }
 #webpage-link-cont div:hover{
+    transition-duration: 0.5s;
+    border: 1px solid #079292;
+}
+#webpage-link-cont-mobile div a svg{
+    margin-right: 5px;
+    fill: white;
+}
+#webpage-link-cont-mobile div:hover{
     transition-duration: 0.5s;
     border: 1px solid #079292;
 }
